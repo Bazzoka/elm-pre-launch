@@ -1,65 +1,117 @@
 WEBVTT
 
 1
-00:00:00.300 --> 00:00:02.473
-Your supplier sells out of a variant.
+00:00:00.533 --> 00:00:03.287
+It's late. Your eBay listing shows one left.
 
 2
-00:00:03.100 --> 00:00:05.643
-But your eBay listing still shows it in stock.
+00:00:03.367 --> 00:00:07.091
+At your supplier's Shopify store, that same variant just sold out.
 
 3
-00:00:06.400 --> 00:00:10.120
-So you check supplier pages by hand, one listing at a time.
+00:00:07.900 --> 00:00:11.505
+eBay still shows one. And you're asleep, at work, or driving.
 
 4
-00:00:10.200 --> 00:00:11.946
-Miss one, and you oversell.
+00:00:12.200 --> 00:00:13.820
+A buyer taps Buy It Now.
 
 5
-00:00:13.400 --> 00:00:18.947
-ELM keeps your eBay listings in step with your Shopify-powered suppliers, down to the variant.
+00:00:13.900 --> 00:00:19.239
+Your supplier has none left. You cancel, and that can count against your seller performance.
 
 6
-00:00:19.300 --> 00:00:23.987
-Today, it checks every supplier variant: in stock, out of stock, or unknown.
+00:00:19.967 --> 00:00:21.820
+This is ELM Easy Monitoring.
 
 7
-00:00:24.067 --> 00:00:27.689
-When one sells out, the matching eBay quantity goes to zero.
+00:00:21.900 --> 00:00:28.220
+Your suppliers change stock. ELM keeps watching, and your eBay quantities stay in step when the checks pass.
 
 8
-00:00:28.000 --> 00:00:32.320
-If a check fails, ELM holds the last known quantity instead of zeroing it.
+00:00:28.833 --> 00:00:32.755
+At launch, you connect eBay yourself, on eBay's own sign in page.
 
 9
-00:00:32.400 --> 00:00:36.160
-And a second check confirms a restock before stock goes back up.
+00:00:33.567 --> 00:00:40.128
+ELM reads your listings and every variation. That works today, shown in the real engine with sample data.
 
 10
-00:00:36.400 --> 00:00:40.153
-Dry run shows you every change before anything is sent to eBay.
+00:00:41.433 --> 00:00:47.189
+At launch, you add suppliers by pasting product links, or browse their catalogs inside ELM.
 
 11
-00:00:40.233 --> 00:00:42.847
-And every change has a recorded reason.
+00:00:48.000 --> 00:00:53.142
+Today, ELM already monitors every variant on its own: each color, each size.
 
 12
-00:00:43.300 --> 00:00:47.454
-Coming at launch: discover a supplier's catalog and pick products.
+00:00:54.533 --> 00:01:00.678
+Each eBay variation links to its exact supplier variant. Navy / M is not Navy / L.
 
 13
-00:00:47.700 --> 00:00:51.436
-ELM will generate SKUs and prepare your eBay listings.
+00:01:01.467 --> 00:01:09.838
+When SKUs match exactly, ELM suggests the link and you verify it. Sync then starts by itself, after the next successful check.
 
 14
-00:00:51.600 --> 00:00:54.887
-Smart mapping will match by SKU, options, and title.
+00:01:11.033 --> 00:01:16.452
+At launch, ELM also matches by options and title, with bulk accept and a review queue.
 
 15
-00:00:54.967 --> 00:00:57.045
-Uncertain matches go to your review.
+00:01:17.267 --> 00:01:20.087
+Now the sync. A supplier variant sells out.
 
 16
-00:00:57.800 --> 00:01:04.050
-ELM Easy Monitoring. Early access is coming soon. Follow ELM to get the waitlist link first.
+00:01:20.167 --> 00:01:26.382
+On the next check, ELM sets eBay from one to zero, with Out-of-Stock Control keeping the listing live.
+
+17
+00:01:26.967 --> 00:01:31.352
+When it's back, a second check, at least ten minutes later, puts it back to one.
+
+18
+00:01:32.167 --> 00:01:37.930
+Every decision has a recorded reason. And dry run shows changes before anything is sent.
+
+19
+00:01:39.333 --> 00:01:43.520
+So you can step away. Checks run on a schedule, every hour by default.
+
+20
+00:01:43.600 --> 00:01:49.262
+If a check fails, ELM holds the last quantity for up to 24 hours, instead of guessing.
+
+21
+00:01:49.867 --> 00:01:56.539
+Telegram alerts reach you when something needs you: a failed eBay update, your own edit, or a listing to review.
+
+22
+00:01:57.333 --> 00:02:01.360
+It all lives in one dashboard, with an audit trail of every change.
+
+23
+00:02:04.367 --> 00:02:12.248
+At launch: automatic SKUs, bulk import and bulk management, more than one eBay account, and plans you manage yourself.
+
+24
+00:02:13.133 --> 00:02:19.354
+And auto listing. Start from a supplier's website, browse the catalog, and set a supplier price range.
+
+25
+00:02:20.067 --> 00:02:27.079
+Select products, and ELM prepares drafts, with images matched to each variation and a SKU for every one.
+
+26
+00:02:27.867 --> 00:02:33.806
+You review every draft and publish only what you approve. Eligible listings then join stock sync.
+
+27
+00:02:34.600 --> 00:02:41.253
+ELM only changes quantity. It never buys from your suppliers, and never ends or reprices your listings.
+
+28
+00:02:41.333 --> 00:02:45.157
+Spend less time checking suppliers, and more time growing your store.
+
+29
+00:02:45.900 --> 00:02:49.275
+Join the early access waitlist. The link is on screen.
