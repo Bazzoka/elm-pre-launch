@@ -2,12 +2,14 @@
 <html lang="en" class="no-js" data-mode="static">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; media-src 'self'; style-src 'self'; script-src 'self'; connect-src 'self' https://ibironumtwhhcozyqzyk.supabase.co https://api.web3forms.com; font-src 'self'; base-uri 'self'; form-action 'self'">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ELM Easy Monitoring: eBay stock sync for sellers with Shopify suppliers</title>
   <meta name="description" content="ELM keeps your eBay quantities in step with suppliers that run on Shopify, variant by variant, and shows the reason for every change. Join the early access waitlist.">
   <meta name="theme-color" content="#131209">
   <meta name="color-scheme" content="dark">
   <link rel="canonical" href="https://bazzoka.github.io/elm-pre-launch/">
+  <meta name="elm-config" data-supabase-url="https://ibironumtwhhcozyqzyk.supabase.co" data-supabase-key="sb_publishable_D0hgJ-VKo994CqRunnML3Q_rrPZkaVX" data-web3forms-key="a4f4b2f7-46e6-485e-8eb2-844a00ba893d">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ELM Easy Monitoring">
   <meta property="og:title" content="ELM Easy Monitoring: your eBay business, automated">
@@ -24,10 +26,10 @@
   <link rel="apple-touch-icon" href="static/img/apple-touch-icon.png">
   <link rel="preload" href="brand/fonts/manrope-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="brand/tokens.css">
-  <link rel="stylesheet" href="static/css/site.css">
-  <script src="static/js/site.js" defer></script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does ELM automate?", "acceptedAnswer": {"@type": "Answer", "text": "Today ELM watches your suppliers' product pages and updates the available quantity on your existing eBay listings and variations, with safety rules and a log of every change. At launch it adds product discovery, listing creation, SKU generation, smart mapping and bulk tools."}}, {"@type": "Question", "name": "Does it work with Shopify suppliers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. ELM is built for suppliers whose online stores run on Shopify. Some stores hide stock levels or block automated checks; ELM tells you when a store cannot be read reliably instead of guessing."}}, {"@type": "Question", "name": "Can it create eBay listings?", "acceptedAnswer": {"@type": "Answer", "text": "Listing creation is coming at launch. ELM will prepare listings from supplier products with titles, item specifics, variations and SKUs, and you review them before they go live. It is not available yet."}}, {"@type": "Question", "name": "Does it generate SKUs?", "acceptedAnswer": {"@type": "Answer", "text": "Automatic SKU generation is coming at launch. Today ELM reads the SKUs you already have and suggests mappings when they match exactly."}}, {"@type": "Question", "name": "Can it monitor product variations?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, and this works today. Every check and every stock change is per variation, so one size or color can sell out without touching the others."}}, {"@type": "Question", "name": "What happens when a supplier goes out of stock?", "acceptedAnswer": {"@type": "Answer", "text": "On the next check ELM sets the matching eBay quantity to zero and records why. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing."}}, {"@type": "Question", "name": "Does ELM purchase products automatically?", "acceptedAnswer": {"@type": "Answer", "text": "No. ELM never buys from your suppliers or completes a checkout. You stay in control of where and how you buy, and you are responsible for following eBay's selling policies."}}, {"@type": "Question", "name": "Can I manage many listings at once?", "acceptedAnswer": {"@type": "Answer", "text": "Monitoring and sync already run across all mapped listings. Bulk import and bulk listing management arrive at launch."}}, {"@type": "Question", "name": "How does early access work?", "acceptedAnswer": {"@type": "Answer", "text": "Join the waitlist and confirm your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch."}}, {"@type": "Question", "name": "Will there be a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, a free trial is planned for launch. Its length and limits will be announced with pricing."}}]}</script>
+  <link rel="stylesheet" href="brand/tokens.css?v=a36fa9bd77">
+  <link rel="stylesheet" href="static/css/site.css?v=4f05318a38">
+  <script src="static/js/site.js?v=d13e944c53" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does ELM automate?", "acceptedAnswer": {"@type": "Answer", "text": "Today ELM watches your suppliers' product pages and updates the available quantity on your existing eBay listings and variations, with safety rules and a log of every change. At launch it adds product discovery, listing creation, SKU generation, smart mapping and bulk tools."}}, {"@type": "Question", "name": "Does it work with Shopify suppliers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. ELM is built for suppliers whose online stores run on Shopify. Some stores hide stock levels or block automated checks; ELM tells you when a store cannot be read reliably instead of guessing."}}, {"@type": "Question", "name": "Can it create eBay listings?", "acceptedAnswer": {"@type": "Answer", "text": "Listing creation is coming at launch. ELM will prepare listings from supplier products with titles, item specifics, variations and SKUs, and you review them before they go live. It is not available yet."}}, {"@type": "Question", "name": "Does it generate SKUs?", "acceptedAnswer": {"@type": "Answer", "text": "Automatic SKU generation is coming at launch. Today ELM reads the SKUs you already have and suggests mappings when they match exactly."}}, {"@type": "Question", "name": "Can it monitor product variations?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, and this works today. Every check and every stock change is per variation, so one size or color can sell out without touching the others."}}, {"@type": "Question", "name": "What happens when a supplier goes out of stock?", "acceptedAnswer": {"@type": "Answer", "text": "On the next check ELM sets the matching eBay quantity to zero and records why. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing."}}, {"@type": "Question", "name": "Does ELM purchase products automatically?", "acceptedAnswer": {"@type": "Answer", "text": "No. ELM never buys from your suppliers or completes a checkout. You stay in control of where and how you buy, and you are responsible for following eBay's selling policies."}}, {"@type": "Question", "name": "Can I manage many listings at once?", "acceptedAnswer": {"@type": "Answer", "text": "Monitoring and sync already run across all mapped listings. Bulk import and bulk listing management arrive at launch."}}, {"@type": "Question", "name": "How does early access work?", "acceptedAnswer": {"@type": "Answer", "text": "Join the waitlist with your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch."}}, {"@type": "Question", "name": "How are managed variations counted?", "acceptedAnswer": {"@type": "Answer", "text": "Each eBay variation ELM manages counts as one, and a single item listing counts as one. A listing with 50 variations counts as 50. Your plan limit applies to the total across all your active listings."}}, {"@type": "Question", "name": "Am I charged when I join the waitlist?", "acceptedAnswer": {"@type": "Answer", "text": "No. Joining is free, and picking a plan only tells us what fits your store. Nothing is charged before launch, and you choose your plan when your access is ready."}}, {"@type": "Question", "name": "Will there be a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, a free trial is planned for launch. Its length will be announced before launch."}}]}</script>
 </head>
 <body>
 <a class="skip-link button-sm" href="#main">Skip to content</a>
@@ -39,7 +41,9 @@
       <li><a class="title-4" href="#product">Product</a></li>
       <li><a class="title-4" href="#features">Features</a></li>
       <li><a class="title-4" href="#how">How it works</a></li>
+      <li><a class="title-4" href="#pricing">Pricing</a></li>
       <li><a class="title-4" href="#faq">FAQ</a></li>
+      <li><a class="title-4" href="#contact">Contact</a></li>
     </ul>
     <a class="btn btn-primary button-sm nav-cta" href="#waitlist" data-cta="nav">Join the waitlist</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
@@ -50,7 +54,9 @@
     <a class="heading-5" href="#product">Product</a>
     <a class="heading-5" href="#features">Features</a>
     <a class="heading-5" href="#how">How it works</a>
+    <a class="heading-5" href="#pricing">Pricing</a>
     <a class="heading-5" href="#faq">FAQ</a>
+    <a class="heading-5" href="#contact">Contact</a>
     <a class="btn btn-primary button-md" href="#waitlist" data-cta="mobile-menu">Join the waitlist</a>
   </div>
 </header>
@@ -272,10 +278,47 @@
       </div>
 
       <div class="waitlist-card">
-        <div class="success" id="signups-soon" tabindex="-1">
-          <svg class="i i-lg green" aria-hidden="true"><use href="static/img/icons.svg#i-clock"/></svg>
-          <h3 class="heading-6">Signups open soon</h3>
-          <p class="body-6 muted">We are finishing the waitlist. This page does not collect email addresses yet, so check back soon to save your place.</p>
+        <div class="counter" id="counter">
+          <div class="counter-head">
+            <span class="caption-4 muted" id="counter-label">Verified signups</span>
+            <span class="demo-flag caption-3" id="demo-flag" hidden>Design preview · sample number</span>
+          </div>
+          <p class="counter-num"><span class="heading-2 mono" id="counter-value">0</span><span class="title-2 muted mono"> / <span id="counter-goal">250</span></span></p>
+          <div class="bar" role="progressbar" aria-labelledby="counter-label" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0" id="counter-bar">
+            <div class="bar-fill" id="bar-fill"></div>
+            <div class="bar-marks" id="bar-marks" aria-hidden="true"></div>
+          </div>
+          <ol class="milestones caption-4" id="milestones" aria-label="Milestones"></ol>
+          <p class="caption-5 muted" id="counter-note">Counts people who confirmed their email. Updated live.</p>
+        </div>
+
+        <form class="form" id="waitlist-form" novalidate>
+          <label class="title-4" for="email">Work email</label>
+          <div class="field">
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" placeholder="you@yourstore.com" aria-describedby="email-error" class="body-3">
+          </div>
+          <p class="error caption-2" id="email-error" role="alert" hidden></p>
+          <label class="title-4" for="plan">Plan you are interested in <span class="caption-5 muted">(optional)</span></label>
+          <div class="field">
+            <select id="plan" name="plan" class="body-3">
+              <option value="">Not sure yet</option>
+              <option value="starter">Starter · $19/month · up to 100 variations</option>
+              <option value="growth">Growth · $39/month · up to 300 variations</option>
+              <option value="pro">Pro · $79/month · up to 1,000 variations</option>
+              <option value="business">Business · $149/month · up to 3,000 variations</option>
+            </select>
+          </div>
+          <p class="caption-5 muted plan-note" id="plan-note" hidden></p>
+          <div class="hp" aria-hidden="true"><label for="company_website">Leave this empty</label><input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>
+          <label class="consent caption-2"><input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error"><span>Email me about ELM early access. I can unsubscribe at any time. Read the <a href="privacy.html">privacy notice</a>.</span></label>
+          <p class="error caption-2" id="consent-error" role="alert" hidden></p>
+          <button class="btn btn-primary button-md btn-block" type="submit" id="submit"><span class="btn-label">Join the waitlist</span></button>
+          <p class="error caption-2" id="form-error" role="alert" hidden></p>
+        </form>
+        <div class="success" id="success" hidden tabindex="-1">
+          <svg class="i i-lg green" aria-hidden="true"><use href="static/img/icons.svg#i-envelope"/></svg>
+          <h3 class="heading-6" id="success-title">Check your inbox</h3>
+          <p class="body-6 muted" id="success-text">We sent a confirmation link to <strong id="success-email"></strong>. Your place counts once you confirm it.</p>
         </div>
       </div>
     </div>
@@ -283,10 +326,64 @@
 
   <!-- PRICING -->
   <section class="section" id="pricing" aria-labelledby="pricing-title">
-    <div class="container narrow center">
+    <div class="container">
       <p class="eyebrow caption-3">Pricing</p>
-      <h2 id="pricing-title" class="heading-4">Pricing will be announced before launch</h2>
-      <p class="body-3 muted">Plans will be based on how many variations ELM manages for you, with a free trial. Early access members hear first.</p>
+      <h2 id="pricing-title" class="heading-3 section-title reveal">Priced by the variations you manage</h2>
+      <p class="body-3 muted section-sub">Every plan includes every ELM feature. Plans differ only in how many eBay variations ELM manages for you. Nobody is charged before launch.</p>
+      <ul class="price-grid" aria-label="Plans">
+        <li class="price-card reveal">
+          <h3 class="title-1" id="plan-starter">Starter</h3>
+          <p class="price-amount"><span class="heading-3 mono">$19</span><span class="body-6 muted">/month</span></p>
+          <p class="body-4 price-limit">Up to <span class="mono">100</span> managed variations</p>
+          <a class="btn btn-ghost button-md btn-block" href="#waitlist" data-plan="starter" data-cta="pricing-starter" aria-describedby="plan-starter">Join the waitlist</a>
+        </li>
+        <li class="price-card featured reveal">
+          <div class="price-top"><h3 class="title-1" id="plan-growth">Growth</h3><span class="badge caption-3">Recommended</span></div>
+          <p class="price-amount"><span class="heading-3 mono">$39</span><span class="body-6 muted">/month</span></p>
+          <p class="body-4 price-limit">Up to <span class="mono">300</span> managed variations</p>
+          <a class="btn btn-primary button-md btn-block" href="#waitlist" data-plan="growth" data-cta="pricing-growth" aria-describedby="plan-growth">Join the waitlist</a>
+        </li>
+        <li class="price-card reveal">
+          <h3 class="title-1" id="plan-pro">Pro</h3>
+          <p class="price-amount"><span class="heading-3 mono">$79</span><span class="body-6 muted">/month</span></p>
+          <p class="body-4 price-limit">Up to <span class="mono">1,000</span> managed variations</p>
+          <a class="btn btn-ghost button-md btn-block" href="#waitlist" data-plan="pro" data-cta="pricing-pro" aria-describedby="plan-pro">Join the waitlist</a>
+        </li>
+        <li class="price-card reveal">
+          <h3 class="title-1" id="plan-business">Business</h3>
+          <p class="price-amount"><span class="heading-3 mono">$149</span><span class="body-6 muted">/month</span></p>
+          <p class="body-4 price-limit">Up to <span class="mono">3,000</span> managed variations</p>
+          <a class="btn btn-ghost button-md btn-block" href="#waitlist" data-plan="business" data-cta="pricing-business" aria-describedby="plan-business">Join the waitlist</a>
+        </li>
+      </ul>
+
+      <div class="price-details">
+        <div class="price-box reveal">
+          <h3 class="title-2">Every plan includes</h3>
+          <ul class="includes">
+            <li><span class="body-5">Shopify supplier stock monitoring</span><span class="status status-today caption-3">Works today</span></li>
+            <li><span class="body-5">Automatic eBay stock synchronization</span><span class="status status-today caption-3">Works today</span></li>
+            <li><span class="body-5">Automatic quantity updates: 1 when the supplier has stock, 0 when it sells out</span><span class="status status-today caption-3">Works today</span></li>
+            <li><span class="body-5">Variation level management</span><span class="status status-today caption-3">Works today</span></li>
+            <li><span class="body-5">Supplier to eBay product mapping</span><span class="status status-mixed caption-3">Partly today, rest at launch</span></li>
+            <li><span class="body-5">Dashboard and notifications</span><span class="status status-today caption-3">Works today</span></li>
+            <li><span class="body-5">Telegram alerts</span><span class="status status-today caption-3">Works today</span></li>
+            <li><span class="body-5">Automatic SKU generation</span><span class="status status-launch caption-3">Coming at launch</span></li>
+            <li><span class="body-5">Automatic listing creation</span><span class="status status-launch caption-3">Coming at launch</span></li>
+          </ul>
+        </div>
+        <div class="price-box reveal" id="counting">
+          <h3 class="title-2">How managed variations are counted</h3>
+          <ul class="rules body-6">
+            <li>Each eBay variation counts as one managed variation.</li>
+            <li>A single item listing, with no variations, counts as one.</li>
+            <li>A listing with 50 variations counts as 50.</li>
+            <li>Your plan limit applies to the total of active managed variations across all your listings.</li>
+          </ul>
+          <p class="body-6 muted">Example: 40 single item listings plus 2 listings with 50 variations each come to 140 managed variations, which fits the Growth plan.</p>
+        </div>
+      </div>
+      <p class="caption-5 muted price-note">Prices in US dollars, billed monthly once ELM launches. Joining the waitlist is free and does not commit you to a plan. A free trial is planned for launch.</p>
     </div>
   </section>
 
@@ -304,8 +401,48 @@
         <details><summary class="title-3">What happens when a supplier goes out of stock?</summary><p class="body-6 muted">On the next check ELM sets the matching eBay quantity to zero and records why. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing.</p></details>
         <details><summary class="title-3">Does ELM purchase products automatically?</summary><p class="body-6 muted">No. ELM never buys from your suppliers or completes a checkout. You stay in control of where and how you buy, and you are responsible for following eBay's selling policies.</p></details>
         <details><summary class="title-3">Can I manage many listings at once?</summary><p class="body-6 muted">Monitoring and sync already run across all mapped listings. Bulk import and bulk listing management arrive at launch.</p></details>
-        <details><summary class="title-3">How does early access work?</summary><p class="body-6 muted">Join the waitlist and confirm your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch.</p></details>
-        <details><summary class="title-3">Will there be a free trial?</summary><p class="body-6 muted">Yes, a free trial is planned for launch. Its length and limits will be announced with pricing.</p></details>
+        <details><summary class="title-3">How does early access work?</summary><p class="body-6 muted">Join the waitlist with your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch.</p></details>
+        <details><summary class="title-3">How are managed variations counted?</summary><p class="body-6 muted">Each eBay variation ELM manages counts as one, and a single item listing counts as one. A listing with 50 variations counts as 50. Your plan limit applies to the total across all your active listings.</p></details>
+        <details><summary class="title-3">Am I charged when I join the waitlist?</summary><p class="body-6 muted">No. Joining is free, and picking a plan only tells us what fits your store. Nothing is charged before launch, and you choose your plan when your access is ready.</p></details>
+        <details><summary class="title-3">Will there be a free trial?</summary><p class="body-6 muted">Yes, a free trial is planned for launch. Its length will be announced before launch.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="section" id="contact" aria-labelledby="contact-title">
+    <div class="container contact-grid">
+      <div class="contact-copy">
+        <p class="eyebrow caption-3">Contact</p>
+        <h2 id="contact-title" class="heading-3">Contact us</h2>
+        <p class="body-3 muted">Questions about ELM, your suppliers, pricing or early access? Send us a message and we will reply by email.</p>
+        <!-- contact-email --><p class="body-5 contact-direct"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-envelope"/></svg><span>Prefer email? Write to <a href="mailto:ahmedmoghny212@gmail.com">ahmedmoghny212@gmail.com</a></span></p><!-- /contact-email -->
+      </div>
+      <div class="waitlist-card contact-card">
+        <form class="form" id="contact-form" novalidate>
+          <label class="title-4" for="c-name">Full name</label>
+          <div class="field"><input id="c-name" name="name" type="text" autocomplete="name" required maxlength="100" aria-describedby="c-name-error" class="body-3"></div>
+          <p class="error caption-2" id="c-name-error" role="alert" hidden></p>
+          <label class="title-4" for="c-email">Email address</label>
+          <div class="field"><input id="c-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" placeholder="you@yourstore.com" aria-describedby="c-email-error" class="body-3"></div>
+          <p class="error caption-2" id="c-email-error" role="alert" hidden></p>
+          <label class="title-4" for="c-subject">Subject</label>
+          <div class="field"><input id="c-subject" name="subject" type="text" required maxlength="150" aria-describedby="c-subject-error" class="body-3"></div>
+          <p class="error caption-2" id="c-subject-error" role="alert" hidden></p>
+          <label class="title-4" for="c-message">Message</label>
+          <div class="field"><textarea id="c-message" name="message" rows="6" required minlength="10" maxlength="5000" aria-describedby="c-message-error" class="body-3"></textarea></div>
+          <p class="error caption-2" id="c-message-error" role="alert" hidden></p>
+          <div class="hp" aria-hidden="true"><label for="c-website">Leave this empty</label><input id="c-website" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>
+          <p class="caption-5 muted">We use your details only to answer your message. Read the <a href="privacy.html">privacy notice</a>.</p>
+          <button class="btn btn-primary button-md btn-block" type="submit" id="c-submit"><span class="btn-label">Send message</span></button>
+          <p class="error caption-2" id="c-form-error" role="alert" hidden></p>
+        </form>
+        <div class="success" id="c-success" hidden tabindex="-1">
+          <svg class="i i-lg green" aria-hidden="true"><use href="static/img/icons.svg#i-envelope"/></svg>
+          <h3 class="heading-6">Message sent</h3>
+          <p class="body-6 muted">Thanks. Your message reached us, and we will reply to <strong id="c-success-email"></strong>.</p>
+          <button class="btn btn-ghost button-sm" type="button" id="c-again">Send another message</button>
+        </div>
       </div>
     </div>
   </section>
@@ -326,6 +463,12 @@
       <img src="brand/logo/elm-logo-on-dark.svg" alt="ELM" width="86" height="26">
       <p class="caption-5 muted">ELM Easy Monitoring. Stock sync for eBay sellers whose suppliers run on Shopify.</p>
     </div>
+    <nav aria-label="Legal" class="footer-links caption-2">
+      <a href="#pricing">Pricing</a>
+      <a href="#contact">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <!-- contact-email --><a href="mailto:ahmedmoghny212@gmail.com">ahmedmoghny212@gmail.com</a><!-- /contact-email -->
+    </nav>
   </div>
   <div class="container">
     <p class="caption-5 muted legal">eBay is a trademark of eBay Inc. Shopify is a trademark of Shopify Inc. ELM is independent and is not affiliated with or endorsed by eBay or Shopify. Product screens show sample data.</p>

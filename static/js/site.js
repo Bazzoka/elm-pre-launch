@@ -264,18 +264,86 @@
   wireTabs(scTabs, (tab) => { renderShowcase(tab.id.replace('sc-', '')); track('showcase_tab', tab.id); });
   renderShowcase('inventory');
 
+  // ------------------------------------------------------------ backends
+  // Local server (Flask): the /api endpoints. Static copy (GitHub Pages): the waitlist goes to Supabase through two
+  // public database functions, and contact messages go to Web3Forms. Both keys are public by design; no secret is here.
+  const cfg = ($('meta[name="elm-config"]') || { dataset: {} }).dataset;
+  const has = (v) => !!v && !/^\{\{/.test(v);
+  const SB = STATIC && has(cfg.supabaseUrl) && has(cfg.supabaseKey) ? { url: cfg.supabaseUrl, key: cfg.supabaseKey } : null;
+  const W3F = STATIC && has(cfg.web3formsKey) ? cfg.web3formsKey : null;
+  async function rpc(fn, body) {
+    if (!SB) throw new Error('not configured');
+    const r = await fetch(`${SB.url}/rest/v1/rpc/${fn}`, {
+      method: 'POST', headers: { apikey: SB.key, 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}),
+    });
+    if (!r.ok) throw new Error(String(r.status));
+    return r.json();
+  }
+  // the local server signs a form token with a minimum fill time; the static copy checks the fill time in the page
+  const pageStart = Date.now();
+  let formToken = null;
+  async function getToken() {
+    if (STATIC) return;
+    const r = await fetch('/api/form-token', { cache: 'no-store' });
+    formToken = (await r.json()).token;
+  }
+  getToken().catch(() => {});
+  const tooQuick = (since) => STATIC && Date.now() - since < 3000;
+
+  function showError(id, msg, input) {
+    const p = document.getElementById(id);
+    p.textContent = msg || '';
+    p.hidden = !msg;
+    if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
+  }
+  const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
+  const directEmail = () => { const a = $('.contact-direct a'); return a ? a.textContent.trim() : ''; };
+  function setBusy(btn, busy, idle, working) {
+    btn.disabled = busy;
+    if (busy) btn.setAttribute('aria-busy', 'true'); else btn.removeAttribute('aria-busy');
+    $('.btn-label', btn).textContent = busy ? working : idle;
+  }
+
+  // ------------------------------------------------------------ pricing: carry the chosen plan into the waitlist form
+  const PLAN_NAMES = { starter: 'Starter', growth: 'Growth', pro: 'Pro', business: 'Business' };
+  const planSelect = $('#plan');
+  const planNote = $('#plan-note');
+  function choosePlan(plan) {
+    if (!planSelect || !PLAN_NAMES[plan]) return;
+    planSelect.value = plan;
+    planNote.textContent = `You picked ${PLAN_NAMES[plan]}. You can change it here. Joining is free and nothing is charged.`;
+    planNote.hidden = false;
+  }
+  $$('[data-plan]').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    choosePlan(a.dataset.plan);
+    track('pricing_plan', a.dataset.plan);
+    $('#waitlist').scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+    const target = $('#waitlist-form').hidden ? $('#success') : $('#email');
+    setTimeout(() => target.focus({ preventScroll: true }), reduced ? 0 : 700);
+  }));
+  if (planSelect) {
+    if (PLAN_NAMES[params.get('plan')]) choosePlan(params.get('plan'));
+    planSelect.addEventListener('change', () => { planNote.hidden = true; });
+  }
+
   // ------------------------------------------------------------ waitlist counter (truthful) and form
-  if (!STATIC) {
-  const demo = params.get('demo') === '1';
+  const demo = !STATIC && params.get('demo') === '1';
   let goal = 250;
   let milestones = [50, 100, 150, 200, 250];
   let shown = 0;
+  // the static copy has no confirmation email, so it counts everyone who joined and says so
+  const countWord = STATIC ? 'waitlist signups' : 'verified signups';
+  if (STATIC) {
+    $('#counter-label').textContent = 'Waitlist signups';
+    $('#counter-note').textContent = 'Counts everyone who joined the waitlist. Updated live.';
+  }
   function renderCounter(count) {
     const bar = $('#counter-bar');
     $('#counter-goal').textContent = String(goal);
     bar.setAttribute('aria-valuemax', String(goal));
     bar.setAttribute('aria-valuenow', String(count));
-    bar.setAttribute('aria-valuetext', `${count} of ${goal} verified signups`);
+    bar.setAttribute('aria-valuetext', `${count} of ${goal} ${countWord}`);
     $('#bar-fill').style.transform = `scaleX(${Math.min(1, count / goal)})`;
     // positions are set through the CSSOM: the content security policy blocks inline style attributes
     const marks = $('#bar-marks');
@@ -298,6 +366,7 @@
   }
   async function loadStats() {
     try {
+      if (STATIC) { renderCounter(Math.max(0, Number(await rpc('waitlist_count')) || 0)); return; }
       const r = await fetch('/api/waitlist/stats', { cache: 'no-store' });
       if (!r.ok) throw new Error(String(r.status));
       const s = await r.json();
@@ -318,29 +387,15 @@
     obs.disconnect();
     if (demo) { fetch('/api/config').then((r) => r.json()).then((c) => { goal = c.waitlist.goal; milestones = c.waitlist.milestones; renderCounter(c.waitlist.designPreviewCount); }).catch(() => renderCounter(35)); }
     else loadStats();
-    if (!demo) setInterval(loadStats, 30000);
+    if (!demo) setInterval(loadStats, STATIC ? 60000 : 30000);
   }, { threshold: 0.3 });
   counterObs.observe($('#counter'));
 
   const form = $('#waitlist-form');
   const emailInput = $('#email');
   const consent = $('#consent');
-  let formToken = null;
-  async function getToken() {
-    const r = await fetch('/api/form-token', { cache: 'no-store' });
-    formToken = (await r.json()).token;
-  }
-  getToken().catch(() => {});
   let focused = false;
   form.addEventListener('focusin', () => { if (!focused) { focused = true; track('form_focus'); } });
-
-  function showError(id, msg, input) {
-    const p = document.getElementById(id);
-    p.textContent = msg || '';
-    p.hidden = !msg;
-    if (input) input.setAttribute('aria-invalid', msg ? 'true' : 'false');
-  }
-  const EMAIL = /^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/;
   emailInput.addEventListener('blur', () => { if (emailInput.value && !EMAIL.test(emailInput.value.trim())) showError('email-error', 'Enter a valid email address, like name@example.com.', emailInput); });
   emailInput.addEventListener('input', () => showError('email-error', '', emailInput));
   consent.addEventListener('change', () => showError('consent-error', ''));
@@ -354,42 +409,142 @@
     else if (!EMAIL.test(email)) { showError('email-error', 'Enter a valid email address, like name@example.com.', emailInput); bad = true; }
     if (!consent.checked) { showError('consent-error', 'Tick the box to agree to receive early access emails.'); bad = true; }
     if (bad) { (emailInput.getAttribute('aria-invalid') === 'true' ? emailInput : consent).focus(); return; }
+    if (tooQuick(pageStart)) { showError('form-error', 'That was quick. Wait a moment and try again.'); return; }
 
     const btn = $('#submit');
-    btn.setAttribute('aria-busy', 'true');
-    btn.disabled = true;
-    $('.btn-label', btn).textContent = 'Joining';
+    const plan = planSelect && PLAN_NAMES[planSelect.value] ? planSelect.value : null;
+    setBusy(btn, true, 'Join the waitlist', 'Joining');
     track('form_submit');
     try {
-      if (!formToken) await getToken();
-      const r = await fetch('/api/waitlist', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, consent: true, form_token: formToken, company_website: $('#company_website').value, ...attribution }),
-      });
-      const data = await r.json().catch(() => ({}));
-      if (!r.ok || !data.ok) {
-        track('signup_error', String(r.status));
-        if (data.field === 'email') showError('email-error', data.error, emailInput);
-        else if (data.field === 'consent') showError('consent-error', data.error);
-        else showError('form-error', data.error || 'Something went wrong on our side. Try again in a minute.');
-        if (r.status === 400 && /expired/i.test(data.error || '')) getToken().catch(() => {});
+      let data;
+      let status = 200;
+      if (STATIC) {
+        data = await rpc('join_waitlist', {
+          p_email: email, p_consent: true, p_plan: plan, p_company_website: $('#company_website').value,
+          p_utm_source: attribution.utm_source, p_utm_medium: attribution.utm_medium, p_utm_campaign: attribution.utm_campaign,
+          p_ref: attribution.ref, p_referrer_host: attribution.referrer_host,
+        });
+      } else {
+        if (!formToken) await getToken();
+        const r = await fetch('/api/waitlist', {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, consent: true, plan, form_token: formToken, company_website: $('#company_website').value, ...attribution }),
+        });
+        status = r.status;
+        data = await r.json().catch(() => ({}));
+        if (!r.ok) data.ok = false;
+      }
+      if (!data || !data.ok) {
+        track('signup_error', String(status));
+        if (data && data.field === 'email') showError('email-error', data.error, emailInput);
+        else if (data && data.field === 'consent') showError('consent-error', data.error);
+        else showError('form-error', (data && data.error) || 'Something went wrong on our side. Try again in a minute.');
+        if (status === 400 && /expired/i.test((data && data.error) || '')) getToken().catch(() => {});
         return;
       }
       track('signup_ok');
       form.hidden = true;
-      $('#success-email').textContent = email;
+      if (STATIC) {
+        $('#success-title').textContent = 'You are on the list';
+        const strong = document.createElement('strong');
+        strong.textContent = email;
+        $('#success-text').replaceChildren('We saved your place for ', strong,
+          `. ${plan ? `Plan noted: ${PLAN_NAMES[plan]}. ` : ''}We will email you when early access opens.`);
+        loadStats();
+      } else {
+        $('#success-email').textContent = email;
+      }
       const ok = $('#success');
       ok.hidden = false;
       ok.focus();
     } catch {
       showError('form-error', 'We could not reach the server. Check your connection and try again.');
     } finally {
-      btn.removeAttribute('aria-busy');
-      btn.disabled = false;
-      $('.btn-label', btn).textContent = 'Join the waitlist';
+      setBusy(btn, false, 'Join the waitlist', 'Joining');
     }
   });
-  } // end if (!STATIC)
+
+  // ------------------------------------------------------------ contact form
+  const cForm = $('#contact-form');
+  if (cForm) {
+    const f = { name: $('#c-name'), email: $('#c-email'), subject: $('#c-subject'), message: $('#c-message') };
+    const rules = {
+      name: (v) => (!v ? 'Enter your full name.' : v.length > 100 ? 'Keep your name under 100 characters.' : ''),
+      email: (v) => (!v ? 'Enter your email address.' : !EMAIL.test(v) || v.length > 254 ? 'Enter a valid email address, like name@example.com.' : ''),
+      subject: (v) => (!v ? 'Enter a subject.' : v.length > 150 ? 'Keep the subject under 150 characters.' : ''),
+      message: (v) => (v.length < 10 ? 'Write a message of at least 10 characters.' : v.length > 5000 ? 'Keep the message under 5,000 characters.' : ''),
+    };
+    const check = (k) => { const msg = rules[k](f[k].value.trim()); showError(`c-${k}-error`, msg, f[k]); return !msg; };
+    Object.keys(f).forEach((k) => {
+      f[k].addEventListener('input', () => showError(`c-${k}-error`, '', f[k]));
+      f[k].addEventListener('blur', () => { if (f[k].value.trim()) check(k); });
+    });
+    const fail = (msg) => {
+      const mail = directEmail();
+      showError('c-form-error', mail ? `${msg} You can also email us at ${mail}.` : msg);
+    };
+    cForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      showError('c-form-error', '');
+      const bad = Object.keys(f).filter((k) => !check(k));
+      if (bad.length) { f[bad[0]].focus(); return; }
+      if (STATIC && !W3F) { fail('The contact form is not set up yet.'); return; }
+      if (tooQuick(pageStart)) { showError('c-form-error', 'That was quick. Wait a moment and try again.'); return; }
+      const v = Object.fromEntries(Object.keys(f).map((k) => [k, f[k].value.trim()]));
+      const btn = $('#c-submit');
+      setBusy(btn, true, 'Send message', 'Sending');
+      track('contact_submit');
+      try {
+        let ok = false;
+        let err = '';
+        let field = '';
+        if ($('#c-website').value) {
+          ok = true; // honeypot filled: a bot; pretend it worked and send nothing
+        } else if (STATIC) {
+          const r = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+            body: JSON.stringify({ access_key: W3F, subject: `[ELM contact] ${v.subject}`, from_name: 'ELM pre-launch page', replyto: v.email, name: v.name, email: v.email, message: v.message }),
+          });
+          const d = await r.json().catch(() => ({}));
+          ok = r.ok && d.success === true;
+          err = r.status === 429 ? 'Too many messages from this connection. Try again in an hour.' : '';
+        } else {
+          if (!formToken) await getToken();
+          const r = await fetch('/api/contact', {
+            method: 'POST', headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ ...v, form_token: formToken, company_website: $('#c-website').value }),
+          });
+          const d = await r.json().catch(() => ({}));
+          ok = r.ok && d.ok === true;
+          err = d.error || '';
+          field = d.field || '';
+        }
+        if (!ok) {
+          track('contact_error');
+          if (field && f[field]) { showError(`c-${field}-error`, err, f[field]); f[field].focus(); }
+          else fail(err || 'We could not send your message. Try again in a few minutes.');
+          return;
+        }
+        track('contact_ok');
+        $('#c-success-email').textContent = v.email;
+        cForm.reset();
+        cForm.hidden = true;
+        const done = $('#c-success');
+        done.hidden = false;
+        done.focus();
+      } catch {
+        fail('We could not reach the server. Check your connection and try again.');
+      } finally {
+        setBusy(btn, false, 'Send message', 'Sending');
+      }
+    });
+    $('#c-again').addEventListener('click', () => {
+      $('#c-success').hidden = true;
+      cForm.hidden = false;
+      f.name.focus();
+    });
+  }
+
 
   // ------------------------------------------------------------ FAQ and video
   $$('#faq-list details').forEach((d) => d.addEventListener('toggle', () => { if (d.open) track('faq_open', $('summary', d).textContent); }));
