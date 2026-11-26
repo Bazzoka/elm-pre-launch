@@ -12,12 +12,12 @@
   <meta name="elm-config" data-supabase-url="https://ibironumtwhhcozyqzyk.supabase.co" data-supabase-key="sb_publishable_D0hgJ-VKo994CqRunnML3Q_rrPZkaVX" data-web3forms-key="a4f4b2f7-46e6-485e-8eb2-844a00ba893d">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="ELM Easy Monitoring">
-  <meta property="og:title" content="ELM Easy Monitoring: your eBay business, automated">
+  <meta property="og:title" content="ELM Easy Monitoring: eBay stock sync for sellers with Shopify suppliers">
   <meta property="og:description" content="Stock sync for eBay sellers whose suppliers run on Shopify. Variant level, with a reason for every change. Join the early access waitlist.">
   <meta property="og:image" content="https://bazzoka.github.io/elm-pre-launch/static/img/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="ELM logo with the line: your eBay business, automated.">
+  <meta property="og:image:alt" content="ELM: Your supplier sold out. Your eBay listing should know. Sample data showing 1 to 0 and 0 to 1.">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ELM Easy Monitoring">
   <meta name="twitter:description" content="Stock sync for eBay sellers whose suppliers run on Shopify. Join the early access waitlist.">
@@ -27,9 +27,9 @@
   <link rel="preload" href="brand/fonts/manrope-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="brand/fonts/manrope-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="brand/tokens.css?v=a36fa9bd77">
-  <link rel="stylesheet" href="static/css/site.css?v=4f05318a38">
-  <script src="static/js/site.js?v=d13e944c53" defer></script>
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "What does ELM automate?", "acceptedAnswer": {"@type": "Answer", "text": "Today ELM watches your suppliers' product pages and updates the available quantity on your existing eBay listings and variations, with safety rules and a log of every change. At launch it adds product discovery, listing creation, SKU generation, smart mapping and bulk tools."}}, {"@type": "Question", "name": "Does it work with Shopify suppliers?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. ELM is built for suppliers whose online stores run on Shopify. Some stores hide stock levels or block automated checks; ELM tells you when a store cannot be read reliably instead of guessing."}}, {"@type": "Question", "name": "Can it create eBay listings?", "acceptedAnswer": {"@type": "Answer", "text": "Listing creation is coming at launch. ELM will prepare listings from supplier products with titles, item specifics, variations and SKUs, and you review them before they go live. It is not available yet."}}, {"@type": "Question", "name": "Does it generate SKUs?", "acceptedAnswer": {"@type": "Answer", "text": "Automatic SKU generation is coming at launch. Today ELM reads the SKUs you already have and suggests mappings when they match exactly."}}, {"@type": "Question", "name": "Can it monitor product variations?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, and this works today. Every check and every stock change is per variation, so one size or color can sell out without touching the others."}}, {"@type": "Question", "name": "What happens when a supplier goes out of stock?", "acceptedAnswer": {"@type": "Answer", "text": "On the next check ELM sets the matching eBay quantity to zero and records why. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing."}}, {"@type": "Question", "name": "Does ELM purchase products automatically?", "acceptedAnswer": {"@type": "Answer", "text": "No. ELM never buys from your suppliers or completes a checkout. You stay in control of where and how you buy, and you are responsible for following eBay's selling policies."}}, {"@type": "Question", "name": "Can I manage many listings at once?", "acceptedAnswer": {"@type": "Answer", "text": "Monitoring and sync already run across all mapped listings. Bulk import and bulk listing management arrive at launch."}}, {"@type": "Question", "name": "How does early access work?", "acceptedAnswer": {"@type": "Answer", "text": "Join the waitlist with your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch."}}, {"@type": "Question", "name": "How are managed variations counted?", "acceptedAnswer": {"@type": "Answer", "text": "Each eBay variation ELM manages counts as one, and a single item listing counts as one. A listing with 50 variations counts as 50. Your plan limit applies to the total across all your active listings."}}, {"@type": "Question", "name": "Am I charged when I join the waitlist?", "acceptedAnswer": {"@type": "Answer", "text": "No. Joining is free, and picking a plan only tells us what fits your store. Nothing is charged before launch, and you choose your plan when your access is ready."}}, {"@type": "Question", "name": "Will there be a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, a free trial is planned for launch. Its length will be announced before launch."}}]}</script>
+  <link rel="stylesheet" href="static/css/site.css?v=0f88d9691d">
+  <script src="static/js/site.js?v=aa2843c75c" defer></script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "How does ELM work?", "acceptedAnswer": {"@type": "Answer", "text": "You link each eBay variation to the supplier variant it depends on. ELM then checks the supplier's Shopify store on a schedule, every 60 minutes by default. When a variant sells out, it sets the matching eBay quantity to 0, and when a restock is confirmed by a second check, it sets it back to 1. Every change is read back from eBay and recorded with its reason."}}, {"@type": "Question", "name": "Does it work with every Shopify supplier?", "acceptedAnswer": {"@type": "Answer", "text": "ELM is built for suppliers whose online stores run on Shopify, and it reads each product's live data. It cannot promise every store: some hide stock levels or block automated checks. When a store cannot be read reliably, ELM shows the failed check and its reason instead of guessing, and it never tries to get around a block."}}, {"@type": "Question", "name": "What does ELM change on my eBay listings?", "acceptedAnswer": {"@type": "Answer", "text": "Only the available quantity, and only to 0 or 1 per variation. ELM never ends, deletes or reprices your listings. If a variation shows more than 1, ELM leaves that quantity alone unless you allow it. Today it works with fixed price, Good 'Til Cancelled listings; auctions are not supported."}}, {"@type": "Question", "name": "Does ELM buy products for me?", "acceptedAnswer": {"@type": "Answer", "text": "No. ELM never buys from your suppliers or completes a checkout. Purchasing stays with you, and you are responsible for following eBay's selling policies."}}, {"@type": "Question", "name": "What happens when a supplier goes out of stock?", "acceptedAnswer": {"@type": "Answer", "text": "On that check ELM sets the matching eBay quantity to 0 and records why. It first checks that eBay's Out-of-Stock Control is on, so the listing stays live while sold out. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing."}}, {"@type": "Question", "name": "What safety protections does ELM have?", "acceptedAnswer": {"@type": "Answer", "text": "You can start in dry run and see every change before anything is sent to eBay. A failed check holds the last quantity for a set window, 24 hours by default, instead of zeroing your listing. If you change a quantity on eBay yourself, ELM holds off on that listing for 24 hours and tells you. One switch pauses every eBay change, and built in limits cap how many changes ELM can send per hour and per listing."}}, {"@type": "Question", "name": "Can it monitor product variations?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, and this works today. Every check and every stock change is per variation, so one size or color can sell out without touching the others."}}, {"@type": "Question", "name": "How does mapping work?", "acceptedAnswer": {"@type": "Answer", "text": "Today you link each eBay variation to its supplier variant, and ELM suggests the link when your eBay SKU and the supplier SKU match exactly. Only a mapping you have verified can change your eBay stock. Coming at launch: matching by option values and title, match suggestions within the supplier stores you add, and bulk accept, with uncertain matches sent to a review queue."}}, {"@type": "Question", "name": "Does it generate SKUs?", "acceptedAnswer": {"@type": "Answer", "text": "Automatic SKU generation is coming at launch: ELM will generate a consistent SKU for every variation that does not have one. Today ELM reads the SKUs you already have, suggests mappings when they match exactly, and flags missing or duplicate SKUs so they stay out of sync until you fix them."}}, {"@type": "Question", "name": "What is Auto Listing?", "acceptedAnswer": {"@type": "Answer", "text": "Auto Listing is coming at launch and is not available yet. You will browse a supplier's catalog, filter by supplier price and choose products, and ELM will prepare eBay listing drafts with variations, images matched to each variation and SKUs. You review each draft, and ELM publishes it to eBay only when you approve. Eligible new listings are then connected to stock sync. Use only images and descriptions you have the right to use."}}, {"@type": "Question", "name": "Can I manage many listings at once?", "acceptedAnswer": {"@type": "Answer", "text": "Monitoring and sync already run across all mapped listings, and you can delete up to 200 products from ELM at once with a preview first. Bulk import, bulk mapping and bulk actions on listings arrive at launch."}}, {"@type": "Question", "name": "What do the plans cost?", "acceptedAnswer": {"@type": "Answer", "text": "Starter is $19 a month for up to 100 managed variations, Growth is $39 for 300, Pro is $79 for 1,000 and Business is $149 for 3,000. Every plan includes every feature; plans differ only in how many variations ELM manages for you."}}, {"@type": "Question", "name": "How are managed variations counted?", "acceptedAnswer": {"@type": "Answer", "text": "Each eBay variation ELM manages counts as one, and a single item listing counts as one. A listing with 50 variations counts as 50. Your plan limit applies to the total across all your active listings."}}, {"@type": "Question", "name": "Am I charged when I join the waitlist?", "acceptedAnswer": {"@type": "Answer", "text": "No. Joining is free, and picking a plan only tells us what fits your store. Nothing is charged before launch, and you choose your plan when your access is ready."}}, {"@type": "Question", "name": "Will there be a free trial?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, a free trial is planned for launch. Its length will be announced before launch."}}, {"@type": "Question", "name": "How does early access work?", "acceptedAnswer": {"@type": "Answer", "text": "Join the waitlist with your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch."}}]}</script>
 </head>
 <body>
 <a class="skip-link button-sm" href="#main">Skip to content</a>
@@ -38,9 +38,9 @@
   <nav class="nav" aria-label="Main">
     <a class="nav-logo" href="./" aria-label="ELM home"><img src="brand/logo/elm-logo-on-dark.svg" alt="ELM" width="99" height="30"></a>
     <ul class="nav-links" id="nav-links">
-      <li><a class="title-4" href="#product">Product</a></li>
+      <li><a class="title-4" href="#solution">Product</a></li>
       <li><a class="title-4" href="#features">Features</a></li>
-      <li><a class="title-4" href="#how">How it works</a></li>
+      <li><a class="title-4" href="#demos">Demos</a></li>
       <li><a class="title-4" href="#pricing">Pricing</a></li>
       <li><a class="title-4" href="#faq">FAQ</a></li>
       <li><a class="title-4" href="#contact">Contact</a></li>
@@ -51,157 +51,120 @@
     </button>
   </nav>
   <div class="mobile-menu" id="mobile-menu" hidden>
-    <a class="heading-5" href="#product">Product</a>
-    <a class="heading-5" href="#features">Features</a>
-    <a class="heading-5" href="#how">How it works</a>
-    <a class="heading-5" href="#pricing">Pricing</a>
-    <a class="heading-5" href="#faq">FAQ</a>
-    <a class="heading-5" href="#contact">Contact</a>
+    <a class="title-1" href="#problem">The problem</a>
+    <a class="title-1" href="#solution">How ELM solves it</a>
+    <a class="title-1" href="#how">Getting started</a>
+    <a class="title-1" href="#features">Features</a>
+    <a class="title-1" href="#demos">Demos</a>
+    <a class="title-1" href="#why">Why ELM</a>
+    <a class="title-1" href="#story">Our story</a>
+    <a class="title-1" href="#pricing">Pricing</a>
+    <a class="title-1" href="#faq">FAQ</a>
+    <a class="title-1" href="#contact">Contact</a>
     <a class="btn btn-primary button-md" href="#waitlist" data-cta="mobile-menu">Join the waitlist</a>
   </div>
 </header>
 
 <main id="main">
 
-  <!-- HERO -->
+  <!-- 1 HERO: video first -->
   <section class="hero" aria-labelledby="hero-title">
     <div class="hero-bg" aria-hidden="true"><div class="glow g1"></div><div class="glow g2"></div><div class="grid-lines"></div></div>
     <div class="container hero-inner">
       <p class="chip chip-brand caption-3"><span class="dot"></span>Early access · Before launch</p>
-      <h1 id="hero-title" class="heading-1 hero-title">Your eBay business.<br>Automated.</h1>
-      <p class="hero-sub body-3">ELM watches your suppliers' Shopify stores variant by variant and keeps your eBay quantities in step. At launch it will also bring in products from your suppliers' catalogs, write SKUs and prepare listings for you.</p>
+      <h1 id="hero-title" class="heading-1 hero-title">Your supplier sold out.<br>Your eBay listing should know.</h1>
+      <p class="hero-sub body-3">ELM watches the Shopify stores you buy from, variant by variant, and updates the quantity on your eBay listings with a reason for every change. Listing tools for your supplier catalogs arrive at launch.</p>
       <div class="hero-actions">
         <a class="btn btn-primary button-md" href="#waitlist" data-cta="hero">Join the early access waitlist<svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrow-right"/></svg></a>
-        <button class="btn btn-ghost button-md" type="button" data-open-video data-cta="hero-video"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-play"/></svg>Watch the product tour</button>
+        <a class="btn btn-ghost button-md" href="#features" data-cta="hero-features">Explore features</a>
       </div>
+    </div>
+
+    <div class="container">
+      <figure class="tour reveal" id="tour-frame">
+        <div class="tour-media" id="video-wrap">
+          <video id="tour" controls playsinline preload="none" hidden data-src="static/video/elm-intro.mp4" data-poster="static/video/elm-intro-cover.png" data-captions="static/video/elm-intro.vtt"></video>
+          <button class="tour-play" id="tour-play" type="button" data-cta="hero-video" aria-describedby="tour-caption">
+            <img class="tour-poster" src="static/video/elm-intro-cover.png" alt="" width="1920" height="1080" decoding="async" fetchpriority="high">
+            <span class="tour-btn"><span class="tour-ring"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-play"/></svg></span><span class="button-md">Play the product tour</span></span>
+          </button>
+          <p class="body-6 muted video-missing" id="video-missing" hidden>The product tour is being finished. Join the waitlist and we will send it to you.</p>
+        </div>
+        <figcaption class="tour-caption caption-5" id="tour-caption"><span>ELM product tour with sound and captions. It never plays until you press play.</span><span class="label-row"><span class="tag tag-muted caption-4">Sample data</span><span class="tag caption-4">Concept preview for launch screens</span></span></figcaption>
+      </figure>
       <ul class="proof caption-2">
         <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-shield-check"/></svg>Built on a sync engine covered by more than 11,000 automated tests</li>
+        <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-eye"/></svg>Start in dry run and preview every change first</li>
         <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-hand-pointing"/></svg>ELM never buys from your suppliers. Purchasing stays with you.</li>
       </ul>
     </div>
-
-    <div class="container">
-      <figure class="app-frame reveal" aria-label="Product preview of the ELM dashboard with sample data">
-        <div class="app-top">
-          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
-          <span class="caption-4 app-title">ELM · Inventory</span>
-          <span class="label-row"><span class="tag caption-4">Product preview</span><span class="tag tag-muted caption-4">Sample data</span></span>
-        </div>
-        <div class="app-body">
-          <aside class="app-side" aria-hidden="true">
-            <img src="brand/logo/elm-mark.svg" alt="" width="24" height="24">
-            <span class="side-item on"><svg class="i"><use href="static/img/icons.svg#i-gauge"/></svg></span>
-            <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-package"/></svg></span>
-            <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-storefront"/></svg></span>
-            <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-link-simple"/></svg></span>
-            <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-bell"/></svg></span>
-          </aside>
-          <div class="app-main">
-            <div class="kpis">
-              <div class="kpi"><span class="caption-4">Variants monitored</span><span class="heading-5 mono">1,284</span></div>
-              <div class="kpi"><span class="caption-4">In stock at supplier</span><span class="heading-5 mono">1,197</span></div>
-              <div class="kpi"><span class="caption-4">Changes today</span><span class="heading-5 mono" id="kpi-changes">37</span></div>
-              <div class="kpi"><span class="caption-4">Suppliers</span><span class="heading-5 mono">12</span></div>
-            </div>
-            <div class="app-grid">
-              <div class="panel">
-                <div class="panel-head"><span class="title-4">Variants</span><span class="caption-5 muted">Checked every 60 minutes</span></div>
-                <table class="vt" aria-label="Sample variants">
-                  <thead><tr><th class="caption-4">Variant</th><th class="caption-4">Supplier</th><th class="caption-4">eBay qty</th></tr></thead>
-                  <tbody id="hero-rows">
-                    <tr data-row="0"><td><span class="body-5">Trail Jacket</span><span class="caption-5 muted">Navy / M</span><span class="caption-5 muted mono">NFS-TJ-NV-M</span></td><td><span class="st st-in caption-4">In stock</span></td><td class="mono body-5 q">3</td></tr>
-                    <tr data-row="1"><td><span class="body-5">Canvas Weekender</span><span class="caption-5 muted">Olive</span><span class="caption-5 muted mono">HPO-CW-OL</span></td><td><span class="st st-in caption-4">In stock</span></td><td class="mono body-5 q">2</td></tr>
-                    <tr data-row="2"><td><span class="body-5">Stoneware Mug Set</span><span class="caption-5 muted">Slate</span><span class="caption-5 muted mono">KH-SM-SL4</span></td><td><span class="st st-unk caption-4">Check failed</span></td><td class="mono body-5 q">2 <span class="caption-5 muted">held</span></td></tr>
-                    <tr data-row="3"><td><span class="body-5">Merino Crew Socks</span><span class="caption-5 muted">Grey / L</span><span class="caption-5 muted mono">NFS-MS-GR-L</span></td><td><span class="st st-out caption-4">Sold out</span></td><td class="mono body-5 q">0</td></tr>
-                  </tbody>
-                </table>
-              </div>
-              <div class="panel feed-panel">
-                <div class="panel-head"><span class="title-4">Activity</span><span class="caption-5 muted">Every change has a reason</span></div>
-                <ol class="feed" id="hero-feed" aria-live="off"></ol>
-              </div>
-            </div>
-          </div>
-        </div>
-      </figure>
-    </div>
   </section>
 
-  <!-- PROBLEM -->
+  <!-- 2 PROBLEM -->
   <section class="section" id="problem" aria-labelledby="problem-title">
     <div class="container">
       <p class="eyebrow caption-3">The problem</p>
-      <h2 id="problem-title" class="heading-3 section-title reveal">A sold out variant should never<br>become a canceled order.</h2>
-      <div class="cards-3">
-        <article class="card reveal">
-          <svg class="i i-lg amber" aria-hidden="true"><use href="static/img/icons.svg#i-clock"/></svg>
-          <h3 class="heading-6">Suppliers change without telling you</h3>
-          <p class="body-6 muted">A size sells out on your supplier's store at 2 pm. Your eBay listing keeps selling it until someone checks.</p>
-        </article>
-        <article class="card reveal">
-          <svg class="i i-lg red" aria-hidden="true"><use href="static/img/icons.svg#i-x-circle"/></svg>
-          <h3 class="heading-6">Every cancellation counts</h3>
-          <p class="body-6 muted">An order you cancel because the item is out of stock counts against your seller performance on eBay.</p>
-        </article>
-        <article class="card reveal">
-          <svg class="i i-lg sky" aria-hidden="true"><use href="static/img/icons.svg#i-stack"/></svg>
-          <h3 class="heading-6">Manual checks do not scale</h3>
-          <p class="body-6 muted">Fifty listings is a routine. Hundreds of variants across a dozen suppliers is a second job nobody wants.</p>
-        </article>
-      </div>
-    </div>
-  </section>
+      <h2 id="problem-title" class="heading-3 section-title reveal">One sold out variant can turn into a canceled order</h2>
+      <p class="section-sub body-3 muted reveal">Here is how it happens, one step at a time. <span class="tag tag-muted caption-4">Example</span> This scenario is an illustration, not a real seller's story.</p>
 
-  <!-- WORKFLOWS -->
-  <section class="section" id="product" aria-labelledby="product-title">
-    <div class="container">
-      <p class="eyebrow caption-3">Product</p>
-      <h2 id="product-title" class="heading-3 section-title reveal">Three jobs ELM takes off your plate</h2>
-      <p class="section-sub body-3 muted reveal">Each flow is labeled with what works today and what arrives at launch.</p>
-      <div class="tabs" role="tablist" aria-label="Workflows">
-        <button class="tab button-sm" role="tab" id="tab-sync" aria-controls="wf-sync" aria-selected="true">Stock sync</button>
-        <button class="tab button-sm" role="tab" id="tab-map" aria-controls="wf-map" aria-selected="false" tabindex="-1">Smart mapping</button>
-        <button class="tab button-sm" role="tab" id="tab-list" aria-controls="wf-list" aria-selected="false" tabindex="-1">Listing creation</button>
-      </div>
+      <ol class="story" aria-label="Example: how an oversell happens">
+        <li class="story-step reveal">
+          <p class="story-time caption-3 mono">2:07 am</p>
+          <h3 class="title-2">Your supplier sells out</h3>
+          <div class="mini" aria-hidden="true">
+            <p class="mini-head caption-4"><svg class="i"><use href="static/img/icons.svg#i-storefront"/></svg>Northfield Supply · Shopify store</p>
+            <p class="mini-row"><span class="body-5">Trail Jacket<span class="caption-5 muted"> Navy / M</span></span><span class="st st-out caption-4">Sold out</span></p>
+          </div>
+          <p class="body-6 muted">The last Navy / M leaves your supplier's store in the middle of the night.</p>
+        </li>
+        <li class="story-step reveal">
+          <p class="story-time caption-3 mono">2:07 am</p>
+          <h3 class="title-2">Your eBay listing still shows 1</h3>
+          <div class="mini" aria-hidden="true">
+            <p class="mini-head caption-4"><svg class="i"><use href="static/img/icons.svg#i-tag"/></svg>Your eBay listing · Trail Jacket</p>
+            <p class="mini-row"><span class="body-5">Navy / M<span class="caption-5 muted"> Available</span></span><span class="mono heading-6 warn">1</span></p>
+          </div>
+          <p class="body-6 muted">Nothing tells eBay, so the variation is still for sale.</p>
+        </li>
+        <li class="story-step reveal">
+          <p class="story-time caption-3 mono">2:07 to 6:40 am</p>
+          <h3 class="title-2">You are asleep, at work or driving</h3>
+          <div class="mini mini-icons" aria-hidden="true">
+            <span><svg class="i"><use href="static/img/icons.svg#i-moon"/></svg><span class="caption-4">Asleep</span></span>
+            <span><svg class="i"><use href="static/img/icons.svg#i-briefcase"/></svg><span class="caption-4">At work</span></span>
+            <span><svg class="i"><use href="static/img/icons.svg#i-car"/></svg><span class="caption-4">Driving</span></span>
+          </div>
+          <p class="body-6 muted">Nobody is watching the supplier page, and nobody can watch it all day.</p>
+        </li>
+        <li class="story-step reveal">
+          <p class="story-time caption-3 mono">6:42 am</p>
+          <h3 class="title-2">A buyer orders it</h3>
+          <div class="mini" aria-hidden="true">
+            <p class="mini-head caption-4"><svg class="i"><use href="static/img/icons.svg#i-shopping-cart"/></svg>New eBay order</p>
+            <p class="mini-row"><span class="body-5">Trail Jacket<span class="caption-5 muted"> Navy / M</span></span><span class="mono body-5">Qty 1</span></p>
+          </div>
+          <p class="body-6 muted">The buyer pays for an item your supplier no longer has.</p>
+        </li>
+        <li class="story-step story-end reveal">
+          <p class="story-time caption-3 mono">7:15 am</p>
+          <h3 class="title-2">You can't get the item</h3>
+          <div class="mini mini-risk" aria-hidden="true">
+            <p class="mini-head caption-4"><svg class="i"><use href="static/img/icons.svg#i-warning-circle"/></svg>What happens next</p>
+            <p class="mini-row"><span class="body-5">Cancel the order</span><span class="st st-out caption-4">Risk</span></p>
+          </div>
+          <p class="body-6 muted">You may have to cancel, and cancellations can hurt your seller performance on eBay.</p>
+        </li>
+      </ol>
 
-      <div class="wf" role="tabpanel" id="wf-sync" aria-labelledby="tab-sync">
-        <div class="wf-head"><span class="status status-today caption-3">Works today</span><p class="body-6 muted">When a supplier's stock changes, ELM updates the matching eBay quantity. A failed check holds the last quantity instead of zeroing it, and a restock is confirmed by a second check.</p></div>
-        <div class="wf-lanes">
-          <ol class="pipeline" aria-label="Supplier sells out">
-            <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg><span class="title-4">Supplier sells out</span><span class="caption-5 muted">Navy / M shows sold out</span></li>
-            <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-heartbeat"/></svg><span class="title-4">ELM detects it</span><span class="caption-5 muted">On the next scheduled check</span></li>
-            <li class="end red-end"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrows-clockwise"/></svg><span class="title-4">eBay quantity set to 0</span><span class="caption-5 muted">Written, then read back</span></li>
-          </ol>
-          <ol class="pipeline" aria-label="Supplier restocks">
-            <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg><span class="title-4">Supplier restocks</span><span class="caption-5 muted">Navy / M available again</span></li>
-            <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-list-checks"/></svg><span class="title-4">ELM confirms twice</span><span class="caption-5 muted">Two checks, minutes apart</span></li>
-            <li class="end green-end"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrows-clockwise"/></svg><span class="title-4">eBay quantity restored</span><span class="caption-5 muted">Your listing sells again</span></li>
-          </ol>
-        </div>
-      </div>
-
-      <div class="wf" role="tabpanel" id="wf-map" aria-labelledby="tab-map" hidden>
-        <div class="wf-head"><span class="status status-mixed caption-3">Exact SKU match works today · Option and title matching at launch</span><p class="body-6 muted">ELM links each eBay variation to the supplier variant it depends on. Only a verified mapping can change your stock. Anything uncertain waits for your review.</p></div>
-        <ol class="pipeline pipeline-6" aria-label="Mapping steps">
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-tag"/></svg><span class="title-4">eBay listing</span><span class="caption-5 muted">Read from your account</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-magnifying-glass"/></svg><span class="title-4">Product identified</span><span class="caption-5 muted">By SKU, options, title</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg><span class="title-4">Supplier match</span><span class="caption-5 muted">The store you buy from</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-tree-structure"/></svg><span class="title-4">Variation match</span><span class="caption-5 muted">Navy / M to Navy / M</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check-circle"/></svg><span class="title-4">Verified mapping</span><span class="caption-5 muted">Checked before sync</span></li>
-          <li class="end green-end"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-heartbeat"/></svg><span class="title-4">Monitoring on</span><span class="caption-5 muted">Stock follows the supplier</span></li>
-        </ol>
-      </div>
-
-      <div class="wf" role="tabpanel" id="wf-list" aria-labelledby="tab-list" hidden>
-        <div class="wf-head"><span class="status status-launch caption-3">Coming at launch · Concept preview</span><p class="body-6 muted">Start from a supplier's store, pick products, and ELM prepares eBay listings with SKUs and variations for you to review and publish.</p></div>
-        <ol class="pipeline pipeline-6" aria-label="Listing creation steps">
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-link-simple"/></svg><span class="title-4">Supplier URL</span><span class="caption-5 muted">Paste a store link</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-magnifying-glass"/></svg><span class="title-4">Discover products</span><span class="caption-5 muted">Browse the catalog</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-list-checks"/></svg><span class="title-4">Select products</span><span class="caption-5 muted">One or hundreds</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-barcode"/></svg><span class="title-4">Generate SKUs</span><span class="caption-5 muted">One scheme, every variation</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-paper-plane-tilt"/></svg><span class="title-4">Create eBay listings</span><span class="caption-5 muted">Reviewed, then published</span></li>
-          <li class="end green-end"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-heartbeat"/></svg><span class="title-4">Start monitoring</span><span class="caption-5 muted">Mapped from day one</span></li>
-        </ol>
+      <div class="pains">
+        <h3 class="heading-6 pains-title reveal">One listing is a scare. A whole catalog is a second job.</h3>
+        <ul class="pain-grid">
+          <li class="pain reveal"><svg class="i i-lg amber" aria-hidden="true"><use href="static/img/icons.svg#i-tree-structure"/></svg><h4 class="title-3">Hundreds of variations</h4><p class="body-6 muted">Every size and color has its own stock. Nobody can open hundreds of supplier pages by hand, every hour.</p></li>
+          <li class="pain reveal"><svg class="i i-lg amber" aria-hidden="true"><use href="static/img/icons.svg#i-arrow-counter-clockwise"/></svg><h4 class="title-3">Restocks go unnoticed</h4><p class="body-6 muted">When a variant comes back, your listing stays at 0 until someone notices, and you miss the sales in between.</p></li>
+          <li class="pain reveal"><svg class="i i-lg amber" aria-hidden="true"><use href="static/img/icons.svg#i-clock"/></svg><h4 class="title-3">Listing by hand is slow</h4><p class="body-6 muted">Copying titles, photos and variations from a supplier into eBay takes time for every product you add.</p></li>
+          <li class="pain reveal"><svg class="i i-lg amber" aria-hidden="true"><use href="static/img/icons.svg#i-repeat"/></svg><h4 class="title-3">Mapping is repetitive</h4><p class="body-6 muted">Linking each eBay variation to the right supplier variant is the same careful work, again and again.</p></li>
+          <li class="pain reveal"><svg class="i i-lg amber" aria-hidden="true"><use href="static/img/icons.svg#i-barcode"/></svg><h4 class="title-3">SKUs get hard at scale</h4><p class="body-6 muted">Missing or duplicate SKUs make it easy to lose track of which listing depends on which supplier variant.</p></li>
+        </ul>
       </div>
     </div>
   </section>
@@ -213,118 +176,274 @@
     </div>
   </section>
 
-  <!-- FEATURES -->
-  <section class="section" id="features" aria-labelledby="features-title">
+  <!-- 3 SOLUTION: supplier to ELM to eBay -->
+  <section class="section" id="solution" aria-labelledby="solution-title">
     <div class="container">
-      <p class="eyebrow caption-3">Features</p>
-      <h2 id="features-title" class="heading-3 section-title reveal">Built for variations, suppliers and real catalogs</h2>
-      <div class="legend caption-4"><span class="status status-today">Works today</span><span class="status status-launch">Coming at launch</span></div>
-      <div class="features" id="feature-grid">
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-paper-plane-tilt"/></svg><h3 class="title-2">Auto listing</h3><p class="body-6 muted">Turn a supplier product into a prepared eBay listing with title, item specifics and variations, ready for your review.</p><span class="status status-launch caption-3">Coming at launch</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-barcode"/></svg><h3 class="title-2">Automatic SKU management</h3><p class="body-6 muted">Generate consistent SKUs for every variation that lacks one, then write them to eBay with a check after every change.</p><span class="status status-launch caption-3">Coming at launch</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-link-simple"/></svg><h3 class="title-2">Smart auto mapping</h3><p class="body-6 muted">Match eBay variations to supplier variants by SKU, options and title. Exact SKU suggestions work today.</p><span class="status status-launch caption-3">Coming at launch</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg><h3 class="title-2">Shopify supplier monitoring</h3><p class="body-6 muted">Each variant's availability on the supplier's store: in stock, sold out, pre order, or a check that could not be verified.</p><span class="status status-today caption-3">Works today</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-arrows-clockwise"/></svg><h3 class="title-2">Stock synchronization</h3><p class="body-6 muted">eBay quantities follow the supplier, with every change written to a log and read back from eBay afterwards.</p><span class="status status-today caption-3">Works today</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-upload-simple"/></svg><h3 class="title-2">Bulk import</h3><p class="body-6 muted">Choose products from a supplier's catalog or paste a list of links, and bring them in together.</p><span class="status status-launch caption-3">Coming at launch</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-bell"/></svg><h3 class="title-2">Smart notifications</h3><p class="body-6 muted">Hear about failed writes, suppliers that stop answering and listings that need you. Telegram today, email at launch.</p><span class="status status-today caption-3">Works today</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-shield-check"/></svg><h3 class="title-2">Inventory protection</h3><p class="body-6 muted">Holds instead of zeroing when a check fails, confirms a restock twice, and steps aside when you edit a listing yourself.</p><span class="status status-today caption-3">Works today</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-sliders-horizontal"/></svg><h3 class="title-2">Supplier management</h3><p class="body-6 muted">Pause a supplier, exclude it from sync and see its check history. Reliability scores arrive at launch.</p><span class="status status-today caption-3">Works today</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-chart-line-up"/></svg><h3 class="title-2">Analytics</h3><p class="body-6 muted">Stock outs avoided, supplier reliability and sync activity over time, with exports.</p><span class="status status-launch caption-3">Coming at launch</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-users-three"/></svg><h3 class="title-2">Multi account management</h3><p class="body-6 muted">Connect more than one eBay account and keep their rules and limits apart.</p><span class="status status-launch caption-3">Coming at launch</span></article>
-        <article class="feature reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-tree-structure"/></svg><h3 class="title-2">Variation level automation</h3><p class="body-6 muted">Every rule applies per variation, so Navy / M can sell out while Navy / L keeps selling.</p><span class="status status-today caption-3">Works today</span></article>
+      <p class="eyebrow caption-3">How ELM solves it</p>
+      <h2 id="solution-title" class="heading-3 section-title reveal">ELM watches your suppliers and updates eBay for you</h2>
+      <p class="section-sub body-3 muted reveal">ELM sits between the Shopify stores you buy from and your eBay listings. When stock changes, it checks the facts first, then changes only the quantity. Pick a situation to see what ELM does.</p>
+
+      <div class="flow-card reveal">
+        <div class="flow-top">
+          <div class="tabs tabs-scroll" role="tablist" aria-label="Situations" id="flow-tabs">
+            <button class="tab button-sm" role="tab" id="fl-out" aria-controls="flow-panel" aria-selected="true">Supplier sells out</button>
+            <button class="tab button-sm" role="tab" id="fl-restock" aria-controls="flow-panel" aria-selected="false" tabindex="-1">Supplier restocks</button>
+            <button class="tab button-sm" role="tab" id="fl-fail" aria-controls="flow-panel" aria-selected="false" tabindex="-1">A check fails</button>
+            <button class="tab button-sm" role="tab" id="fl-edit" aria-controls="flow-panel" aria-selected="false" tabindex="-1">You edit on eBay</button>
+            <button class="tab button-sm" role="tab" id="fl-mine" aria-controls="flow-panel" aria-selected="false" tabindex="-1">Your quantity above 1</button>
+          </div>
+          <span class="status status-today caption-3">Works today</span>
+        </div>
+        <div class="flow" id="flow-panel" role="tabpanel" aria-labelledby="fl-out" data-shared="true" aria-live="polite">
+          <div class="node" id="node-supplier">
+            <p class="node-head caption-4"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg>Supplier store</p>
+            <p class="body-5" data-f="s-item">Trail Jacket · Navy / M</p>
+            <p data-f="s-state"><span class="st st-out caption-4">Sold out</span></p>
+            <p class="caption-5 muted" data-f="s-note">Read on the scheduled check</p>
+          </div>
+          <div class="wire" aria-hidden="true"><span class="pulse"></span></div>
+          <div class="node node-elm" id="node-elm">
+            <p class="node-head caption-4"><img src="brand/logo/elm-mark.svg" alt="" width="20" height="20">ELM checks</p>
+            <ul class="checks" data-f="e-checks">
+              <li class="ok caption-2">Mapping verified by you</li>
+              <li class="ok caption-2">Sync is on for this variation</li>
+              <li class="ok caption-2">eBay Out-of-Stock Control is on</li>
+            </ul>
+            <p class="caption-3 node-verdict" data-f="e-verdict">Lower now, on this check</p>
+          </div>
+          <div class="wire" aria-hidden="true"><span class="pulse"></span></div>
+          <div class="node" id="node-ebay">
+            <p class="node-head caption-4"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-tag"/></svg>eBay listing</p>
+            <p class="body-5" data-f="b-item">Trail Jacket · Navy / M</p>
+            <p class="qty mono" data-f="b-qty"><span class="from">1</span><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrow-right"/></svg><span class="to to-out">0</span></p>
+            <p class="caption-5 muted" data-f="b-note">Written, then read back from eBay</p>
+          </div>
+        </div>
+        <p class="flow-outcome body-5" id="flow-outcome">The listing stays live as sold out, so buyers can't order a variation your supplier no longer has.</p>
+      </div>
+      <p class="caption-5 muted flow-note">ELM checks each supplier product on a schedule, every 60 minutes by default, and you can ask for a check at any time. It helps prevent overselling, but a sale can still happen between two checks.</p>
+
+      <div class="watch">
+        <h3 class="heading-5 reveal">Every change shows up with its reason</h3>
+        <p class="body-6 muted reveal">A live feed of what ELM checked and changed. Everything here is invented sample data.</p>
+        <figure class="app-frame reveal" aria-label="Product preview of the ELM dashboard with sample data">
+          <div class="app-top">
+            <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+            <span class="caption-4 app-title">ELM · Inventory</span>
+            <span class="label-row"><span class="tag caption-4">Product preview</span><span class="tag tag-muted caption-4">Sample data</span></span>
+          </div>
+          <div class="app-body">
+            <aside class="app-side" aria-hidden="true">
+              <img src="brand/logo/elm-mark.svg" alt="" width="24" height="24">
+              <span class="side-item on"><svg class="i"><use href="static/img/icons.svg#i-gauge"/></svg></span>
+              <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-package"/></svg></span>
+              <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-storefront"/></svg></span>
+              <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-link-simple"/></svg></span>
+              <span class="side-item"><svg class="i"><use href="static/img/icons.svg#i-bell"/></svg></span>
+            </aside>
+            <div class="app-main">
+              <div class="kpis">
+                <div class="kpi"><span class="caption-4">Variants monitored</span><span class="heading-5 mono">1,284</span></div>
+                <div class="kpi"><span class="caption-4">In stock at supplier</span><span class="heading-5 mono">1,197</span></div>
+                <div class="kpi"><span class="caption-4">Changes today</span><span class="heading-5 mono" id="kpi-changes">37</span></div>
+                <div class="kpi"><span class="caption-4">Suppliers</span><span class="heading-5 mono">12</span></div>
+              </div>
+              <div class="app-grid">
+                <div class="panel">
+                  <div class="panel-head"><span class="title-4">Variants</span><span class="caption-5 muted">Checked every 60 minutes</span></div>
+                  <table class="vt" aria-label="Sample variants">
+                    <thead><tr><th class="caption-4">Variant</th><th class="caption-4">Supplier</th><th class="caption-4">eBay qty</th></tr></thead>
+                    <tbody id="hero-rows">
+                      <tr data-row="0"><td><span class="body-5">Trail Jacket</span><span class="caption-5 muted">Navy / M</span><span class="caption-5 muted mono">NFS-TJ-NV-M</span></td><td><span class="st st-in caption-4">In stock</span></td><td class="mono body-5 q">1</td></tr>
+                      <tr data-row="1"><td><span class="body-5">Canvas Weekender</span><span class="caption-5 muted">Olive</span><span class="caption-5 muted mono">HPO-CW-OL</span></td><td><span class="st st-in caption-4">In stock</span></td><td class="mono body-5 q">1</td></tr>
+                      <tr data-row="2"><td><span class="body-5">Stoneware Mug Set</span><span class="caption-5 muted">Slate</span><span class="caption-5 muted mono">KH-SM-SL4</span></td><td><span class="st st-unk caption-4">Check failed</span></td><td class="mono body-5 q">1 <span class="caption-5 muted">held</span></td></tr>
+                      <tr data-row="3"><td><span class="body-5">Merino Crew Socks</span><span class="caption-5 muted">Grey / L</span><span class="caption-5 muted mono">NFS-MS-GR-L</span></td><td><span class="st st-out caption-4">Sold out</span></td><td class="mono body-5 q">0</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div class="panel feed-panel">
+                  <div class="panel-head"><span class="title-4">Activity</span><span class="caption-5 muted">Every change has a reason</span></div>
+                  <ol class="feed" id="hero-feed" aria-live="off"></ol>
+                </div>
+              </div>
+            </div>
+          </div>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- DASHBOARD SHOWCASE -->
-  <section class="section" id="showcase" aria-labelledby="showcase-title">
-    <div class="container">
-      <p class="eyebrow caption-3">Dashboard</p>
-      <h2 id="showcase-title" class="heading-3 section-title reveal">One place for every listing, supplier and change</h2>
-      <p class="section-sub body-3 muted reveal">Redesigned previews with sample data. Screens marked concept preview show features planned for launch.</p>
-      <div class="tabs tabs-scroll" role="tablist" aria-label="Dashboard screens" id="showcase-tabs"></div>
-      <div class="showcase-frame" id="showcase-panel" role="tabpanel" aria-live="polite"></div>
-    </div>
-  </section>
-
-  <!-- HOW IT WORKS -->
+  <!-- 4 HOW ELM WORKS: the launch journey -->
   <section class="section" id="how" aria-labelledby="how-title">
     <div class="container">
-      <p class="eyebrow caption-3">How it works at launch</p>
-      <h2 id="how-title" class="heading-3 section-title reveal">From connected to covered in four steps</h2>
-      <ol class="steps">
-        <li class="step reveal"><span class="step-n mono caption-3">01</span><h3 class="title-2">Connect your eBay account</h3><p class="body-6 muted">Sign in with eBay. ELM reads your active listings and variations.</p></li>
-        <li class="step reveal"><span class="step-n mono caption-3">02</span><h3 class="title-2">Add your supplier stores</h3><p class="body-6 muted">Paste product links or browse a supplier's catalog to discover products.</p></li>
-        <li class="step reveal"><span class="step-n mono caption-3">03</span><h3 class="title-2">Import or create listings</h3><p class="body-6 muted">Match existing listings automatically, or prepare new ones with SKUs.</p></li>
-        <li class="step reveal"><span class="step-n mono caption-3">04</span><h3 class="title-2">Let ELM keep watch</h3><p class="body-6 muted">Monitoring, mapping and stock run on their own. You review only what cannot be verified safely.</p></li>
+      <p class="eyebrow caption-3">Getting started</p>
+      <h2 id="how-title" class="heading-3 section-title reveal">From sign up to synced listings in eight steps</h2>
+      <p class="section-sub body-3 muted reveal">This is the launch experience. Steps marked works today already run in the current ELM engine. At launch you will do every step yourself, from your own account.</p>
+      <ol class="journey">
+        <li class="jstep reveal"><span class="step-n mono caption-3">01</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-user-plus"/></svg><h3 class="title-2">Create your ELM account</h3><p class="body-6 muted">Sign up yourself and start without a setup call.</p><span class="status status-launch caption-3">Coming at launch</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">02</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-plugs-connected"/></svg><h3 class="title-2">Connect eBay</h3><p class="body-6 muted">Use eBay's own sign in. ELM reads your active listings and variations.</p><span class="status status-launch caption-3">Coming at launch</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">03</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg><h3 class="title-2">Add your suppliers</h3><p class="body-6 muted">Add the Shopify stores you buy from by pasting product links.</p><span class="status status-today caption-3">Works today</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">04</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-magnifying-glass"/></svg><h3 class="title-2">Discover or import products</h3><p class="body-6 muted">Browse a supplier's catalog, or import many products by link list or CSV.</p><span class="status status-launch caption-3">Coming at launch</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">05</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-git-merge"/></svg><h3 class="title-2">Map products and variations</h3><p class="body-6 muted">Link each eBay variation to its supplier variant. ELM suggests matches and you confirm them.</p><span class="status status-mixed caption-3">Exact SKU today · more at launch</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">06</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-seal-check"/></svg><h3 class="title-2">Verify where required</h3><p class="body-6 muted">Only a mapping you have verified can change your eBay stock.</p><span class="status status-today caption-3">Works today</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">07</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-eye"/></svg><h3 class="title-2">Start in dry run, then switch on</h3><p class="body-6 muted">Preview every change first. Then turn on monitoring and sync for eligible listings.</p><span class="status status-today caption-3">Works today</span></li>
+        <li class="jstep reveal"><span class="step-n mono caption-3">08</span><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-squares-four"/></svg><h3 class="title-2">Manage from the dashboard</h3><p class="body-6 muted">Listings, suppliers, decisions and alerts in one place.</p><span class="status status-today caption-3">Works today</span></li>
       </ol>
     </div>
   </section>
 
-  <!-- WAITLIST -->
-  <section class="section waitlist" id="waitlist" aria-labelledby="waitlist-title">
-    <div class="container waitlist-grid">
-      <div class="waitlist-copy">
-        <p class="eyebrow caption-3">Early access</p>
-        <h2 id="waitlist-title" class="heading-3">Join the early access waitlist</h2>
-        <p class="body-3 muted">We are opening ELM to a small group of eBay sellers first. Join the list and we will email you when your place is ready.</p>
-        <ul class="benefits">
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">Priority access before public launch</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">A founding member offer, announced before launch</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">Early access to new features as they ship</span></li>
-          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">A direct line to the people building it</span></li>
-        </ul>
-        <p class="caption-5 muted">Early access benefits will be confirmed by email before launch. Nothing on this page is a binding offer.</p>
+  <!-- 5 FEATURES: four categories -->
+  <section class="section" id="features" aria-labelledby="features-title">
+    <div class="container">
+      <p class="eyebrow caption-3">Features</p>
+      <h2 id="features-title" class="heading-3 section-title reveal">Everything ELM does, and when you get it</h2>
+      <p class="section-sub body-3 muted reveal">Works today means it runs in the current ELM engine. Coming at launch means we are building it for the commercial launch and it is not available yet. ELM only changes the available quantity on eBay, and it never buys from your suppliers.</p>
+
+      <div class="feat-bar">
+        <div class="tabs tabs-scroll feat-tabs" role="tablist" aria-label="Feature categories" id="feat-tabs">
+          <button class="tab button-sm" role="tab" id="ft-monitoring" aria-controls="fp-monitoring" aria-selected="true">Monitoring and inventory</button>
+          <button class="tab button-sm" role="tab" id="ft-listing" aria-controls="fp-listing" aria-selected="false" tabindex="-1">Auto Listing</button>
+          <button class="tab button-sm" role="tab" id="ft-sku" aria-controls="fp-sku" aria-selected="false" tabindex="-1">SKU and mapping</button>
+          <button class="tab button-sm" role="tab" id="ft-business" aria-controls="fp-business" aria-selected="false" tabindex="-1">Business management</button>
+        </div>
+        <div class="feat-filter" role="group" aria-label="Show features by status" id="feat-filter">
+          <button class="chip-btn caption-4" type="button" data-filter="all" aria-pressed="true">All</button>
+          <button class="chip-btn caption-4" type="button" data-filter="today" aria-pressed="false">Works today</button>
+          <button class="chip-btn caption-4" type="button" data-filter="launch" aria-pressed="false">Coming at launch</button>
+        </div>
       </div>
 
-      <div class="waitlist-card">
-        <div class="counter" id="counter">
-          <div class="counter-head">
-            <span class="caption-4 muted" id="counter-label">Verified signups</span>
-            <span class="demo-flag caption-3" id="demo-flag" hidden>Design preview · sample number</span>
-          </div>
-          <p class="counter-num"><span class="heading-2 mono" id="counter-value">0</span><span class="title-2 muted mono"> / <span id="counter-goal">250</span></span></p>
-          <div class="bar" role="progressbar" aria-labelledby="counter-label" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0" id="counter-bar">
-            <div class="bar-fill" id="bar-fill"></div>
-            <div class="bar-marks" id="bar-marks" aria-hidden="true"></div>
-          </div>
-          <ol class="milestones caption-4" id="milestones" aria-label="Milestones"></ol>
-          <p class="caption-5 muted" id="counter-note">Counts people who confirmed their email. Updated live.</p>
+      <!-- Monitoring and inventory -->
+      <div class="feat-panel" role="tabpanel" id="fp-monitoring" aria-labelledby="ft-monitoring">
+        <div class="feat-head"><h3 class="heading-6">Monitoring and inventory</h3><p class="body-6 muted">Supplier stock in, eBay quantity out, with safety rules in between.</p></div>
+        <div class="feat-grid">
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-pulse"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Variant level monitoring</h4><p class="body-6 muted">ELM checks every supplier variant on its own and reads it as in stock, out of stock, pre order or unknown.</p><p class="feat-benefit body-5">One size can sell out while the others keep selling.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">A failed check is never treated as sold out. Back order and pre order count as not available. Only suppliers whose stores run on Shopify can change eBay stock today.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrows-clockwise"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Automatic stock sync</h4><p class="body-6 muted">When a mapped supplier variant sells out, ELM sets the matching eBay quantity to 0. When it is confirmed back in stock, ELM sets it to 1.</p><p class="feat-benefit body-5">Your listings follow your supplier without you checking.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Quantity only, and only 0 or 1 per variation. After every change ELM reads the listing back from eBay to confirm it. Works with fixed price, Good 'Til Cancelled listings; auctions are not supported.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-lightning"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Sold out lowers at once</h4><p class="body-6 muted">When a supplier variant shows sold out, ELM lowers the matching eBay quantity on that check, without waiting.</p><p class="feat-benefit body-5">Less time for an order to come in on an item you can't get.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Needs a verified mapping, sync switched on, and eBay's Out-of-Stock Control switched on.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-checks"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Restock confirmed twice</h4><p class="body-6 muted">ELM confirms a restock with a second check before it puts a variation back on sale.</p><p class="feat-benefit body-5">A brief glitch on the supplier page does not reopen sales.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Restoring normally takes about one confirmation gap, 10 minutes by default, so it is not instant.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-hourglass"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Failed checks hold</h4><p class="body-6 muted">If a supplier check fails, ELM holds the last known quantity for a set window instead of zeroing your listing.</p><p class="feat-benefit body-5">A slow or blocked page does not empty your listings.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">The window is 24 hours by default, counted from the first failed check. If the supplier still cannot be read after that, ELM lowers the quantity to 0.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-shield-check"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Out-of-Stock Control check</h4><p class="body-6 muted">ELM checks that eBay's Out-of-Stock Control is on before it sets anything to 0.</p><p class="feat-benefit body-5">Your listings stay live while sold out, ready for the restock.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">You switch Out-of-Stock Control on in eBay. With it off, ELM sends no 0 and alerts you.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-pencil-simple"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Your edits respected</h4><p class="body-6 muted">If you change a quantity on eBay yourself, ELM holds off on that listing instead of overwriting you, and tells you.</p><p class="feat-benefit body-5">You can step in by hand without fighting the automation.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">The hold lasts 24 hours by default, per listing or variation. Then normal sync resumes by itself; an administrator can end it early.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-hand-palm"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Quantities above 1 stay yours</h4><p class="body-6 muted">If a variation shows more than 1 on eBay, ELM leaves that quantity alone unless you allow it.</p><p class="feat-benefit body-5">ELM leaves it alone unless you allow it.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">ELM itself only ever writes 0 or 1.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-eye"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Dry run preview</h4><p class="body-6 muted">Dry run shows what ELM would change without sending anything to eBay.</p><p class="feat-benefit body-5">See every change before it goes live.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Each change in the preview comes with the reason ELM would make it.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-pause-circle"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Pause switch and write limits</h4><p class="body-6 muted">One switch stops every eBay change at once. Built in limits cap how many changes ELM can send per hour and per listing.</p><p class="feat-benefit body-5">A bad supplier reading cannot flood your account.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">The pause switch is for administrators. A 0 that meets a full limit waits and is sent when there is room, with an alert.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-timer"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Scheduled and manual checks</h4><p class="body-6 muted">ELM checks each supplier product on a schedule, every 60 minutes by default, and you can ask for a check at any time.</p><p class="feat-benefit body-5">Steady coverage without opening a single supplier page.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Checks are polite: one request per supplier site every 3 seconds. ELM identifies itself, respects robots.txt and never tries to get around a block. It is scheduled, not real time.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-sliders-horizontal"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Your own stock rules</h4><p class="body-6 muted">Set your own rules for how many units eBay shows when a supplier has stock.</p><p class="feat-benefit body-5">Match the quantity buyers see to how you sell.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet; today every variation is 0 or 1. The final rule options are still to be confirmed.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrows-split"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Supplier change alerts</h4><p class="body-6 muted">ELM will tell you when a supplier adds, removes or renames a variant you depend on.</p><p class="feat-benefit body-5">Catch catalog changes before they break a mapping.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet.</p></details></article>
         </div>
+      </div>
 
-        <form class="form" id="waitlist-form" novalidate>
-          <label class="title-4" for="email">Work email</label>
-          <div class="field">
-            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" placeholder="you@yourstore.com" aria-describedby="email-error" class="body-3">
-          </div>
-          <p class="error caption-2" id="email-error" role="alert" hidden></p>
-          <label class="title-4" for="plan">Plan you are interested in <span class="caption-5 muted">(optional)</span></label>
-          <div class="field">
-            <select id="plan" name="plan" class="body-3">
-              <option value="">Not sure yet</option>
-              <option value="starter">Starter · $19/month · up to 100 variations</option>
-              <option value="growth">Growth · $39/month · up to 300 variations</option>
-              <option value="pro">Pro · $79/month · up to 1,000 variations</option>
-              <option value="business">Business · $149/month · up to 3,000 variations</option>
-            </select>
-          </div>
-          <p class="caption-5 muted plan-note" id="plan-note" hidden></p>
-          <div class="hp" aria-hidden="true"><label for="company_website">Leave this empty</label><input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>
-          <label class="consent caption-2"><input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error"><span>Email me about ELM early access. I can unsubscribe at any time. Read the <a href="privacy.html">privacy notice</a>.</span></label>
-          <p class="error caption-2" id="consent-error" role="alert" hidden></p>
-          <button class="btn btn-primary button-md btn-block" type="submit" id="submit"><span class="btn-label">Join the waitlist</span></button>
-          <p class="error caption-2" id="form-error" role="alert" hidden></p>
-        </form>
-        <div class="success" id="success" hidden tabindex="-1">
-          <svg class="i i-lg green" aria-hidden="true"><use href="static/img/icons.svg#i-envelope"/></svg>
-          <h3 class="heading-6" id="success-title">Check your inbox</h3>
-          <p class="body-6 muted" id="success-text">We sent a confirmation link to <strong id="success-email"></strong>. Your place counts once you confirm it.</p>
+      <!-- Auto Listing -->
+      <div class="feat-panel" role="tabpanel" id="fp-listing" aria-labelledby="ft-listing">
+        <div class="feat-head"><h3 class="heading-6">Auto Listing</h3><p class="body-6 muted">From a supplier's store to eBay listing drafts you review. Every feature in this group is coming at launch and is not available yet.</p></div>
+        <div class="feat-grid">
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-binoculars"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Catalog discovery</h4><p class="body-6 muted">Browse a supplier's store catalog in ELM and choose the products you want.</p><p class="feat-benefit body-5">Find what to sell without leaving ELM.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Some stores limit how fast their catalog can be read.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-funnel"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Supplier price filter</h4><p class="body-6 muted">Set a minimum and maximum supplier price to narrow the products you browse.</p><p class="feat-benefit body-5">Skip products outside the range you sell in.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">It filters supplier prices only. ELM does not set or change eBay prices.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-file-csv"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Bulk import</h4><p class="body-6 muted">Paste a list of product links or upload a CSV to add many products at once.</p><p class="feat-benefit body-5">Bring in a whole range in one step.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet; today products are added one link at a time.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-cursor-click"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Product selection</h4><p class="body-6 muted">Select one product or many and get a listing draft for each to review.</p><p class="feat-benefit body-5">Prepare a batch of listings in one action.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. eBay selling limits apply and are checked before publishing.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-article"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Listing preparation</h4><p class="body-6 muted">ELM prepares eBay listing drafts with variations, a suggested category and the item specifics eBay asks for.</p><p class="feat-benefit body-5">Start from a full draft instead of a blank form.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Category rules vary, so some drafts will need manual fixes. Drafts are always reviewed by you.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-text-aa"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Titles and descriptions</h4><p class="body-6 muted">Drafts bring in the product title and description as the supplier wrote them, for you to edit before publishing.</p><p class="feat-benefit body-5">No retyping product text from the supplier's page.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. ELM imports text; it does not write it for you. Use only descriptions you have the right to use.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-image"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Product images</h4><p class="body-6 muted">ELM will bring the supplier's product images into your draft listing, ready for your review.</p><p class="feat-benefit body-5">No downloading and uploading photos one by one.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Use only images you have the right to use.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-images"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Images matched to variations</h4><p class="body-6 muted">ELM will match supplier images to the right color or variation in your draft.</p><p class="feat-benefit body-5">Buyers see the option they pick.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Planned for launch, with your review before publishing.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-barcode"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Automatic SKUs</h4><p class="body-6 muted">Every variation in a draft gets a consistent SKU if it does not have one.</p><p class="feat-benefit body-5">New listings are ready to map and sync from day one.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. One fixed SKU scheme at first.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-paper-plane-tilt"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Publish to eBay after review</h4><p class="body-6 muted">You review each draft, and ELM publishes it to eBay only when you approve.</p><p class="feat-benefit body-5">Nothing goes live that you have not seen.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. ELM will apply your eBay business policies and check your selling limits before it publishes.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-heartbeat"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Connected to monitoring</h4><p class="body-6 muted">Listings ELM creates from a supplier product will be connected to stock sync when they are eligible, with no separate mapping step.</p><p class="feat-benefit body-5">New listings are protected from the start.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Today, listings found on eBay still need mapping by hand.</p></details></article>
         </div>
+      </div>
+
+      <!-- SKU and mapping -->
+      <div class="feat-panel" role="tabpanel" id="fp-sku" aria-labelledby="ft-sku">
+        <div class="feat-head"><h3 class="heading-6">SKU and mapping</h3><p class="body-6 muted">Which supplier variant each eBay variation depends on, checked before anything syncs.</p></div>
+        <div class="feat-grid">
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-link-simple"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Exact SKU suggestions</h4><p class="body-6 muted">ELM reads the SKUs you already have on eBay. When your eBay SKU and the supplier SKU match exactly, it suggests the link for you to check.</p><p class="feat-benefit body-5">Fewer links to make by hand.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Only exact, unique matches, and the comparison is case sensitive. Title or option matching arrives at launch.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-copy"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Duplicate detection</h4><p class="body-6 muted">ELM flags variations with a missing or duplicate SKU and keeps them out of sync until you fix them.</p><p class="feat-benefit body-5">A shared SKU can't change the wrong listing.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Today a listing with variations needs a unique SKU on every variation before it can sync.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-shield-warning"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">SKU validation</h4><p class="body-6 muted">If a SKU on eBay changes and no longer matches, ELM stops syncing that variation and tells you.</p><p class="feat-benefit body-5">An edit in Seller Hub can't quietly break your sync.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Sync for that variation stays off until the mapping is checked again.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-warning"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Ambiguous match detection</h4><p class="body-6 muted">If a SKU could match more than one item, ELM flags it and does not suggest a link.</p><p class="feat-benefit body-5">No guessing on matches that could go either way.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Today this covers SKU matches. A review queue for uncertain option or title matches comes at launch.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-seal-check"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Verification before sync</h4><p class="body-6 muted">Only a mapping you have verified can change your eBay stock. Once verified, sync starts after the next successful supplier check.</p><p class="feat-benefit body-5">You stay in charge of what ELM is allowed to change.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">You can switch off or retire a mapping at any time, and its history stays on record.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-tree-structure"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Listing changes sent to review</h4><p class="body-6 muted">If a listing's variations change on eBay, ELM pauses its sync and asks you to review the mapping.</p><p class="feat-benefit body-5">New or removed variations never sync on old links.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">You get a Telegram alert when a listing needs your attention.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-hash"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">SKU generation</h4><p class="body-6 muted">ELM will generate a consistent SKU for every variation that does not have one.</p><p class="feat-benefit body-5">Clean SKUs across your whole catalog.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. One fixed scheme at first.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-upload-simple"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">SKUs written to eBay</h4><p class="body-6 muted">ELM will write new SKUs to eBay and read each listing back to confirm the change.</p><p class="feat-benefit body-5">Your eBay listings and ELM use the same SKUs.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-intersect"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Variant matching</h4><p class="body-6 muted">ELM will also match variations by option values and title, and send uncertain matches to a review queue.</p><p class="feat-benefit body-5">Map listings that never had matching SKUs.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Only exact matches may start syncing without your review.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-list-magnifying-glass"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Match suggestions</h4><p class="body-6 muted">ELM will suggest which product in your supplier stores matches each eBay listing, and you confirm it before sync starts.</p><p class="feat-benefit body-5">Less searching through supplier catalogs.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Only within the supplier stores you add. ELM does not search the whole web.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-stack"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Bulk mapping</h4><p class="body-6 muted">Review and accept many suggested mappings in one step.</p><p class="feat-benefit body-5">Accept many suggested matches in one step.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet.</p></details></article>
+        </div>
+      </div>
+
+      <!-- Business management -->
+      <div class="feat-panel" role="tabpanel" id="fp-business" aria-labelledby="ft-business">
+        <div class="feat-head"><h3 class="heading-6">Business management</h3><p class="body-6 muted">The dashboard, records and alerts you run your store from.</p></div>
+        <div class="feat-grid">
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-squares-four"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Dashboard</h4><p class="body-6 muted">Your listings, suppliers and recent changes in one place, in light and dark themes, on a phone screen too.</p><p class="feat-benefit body-5">Know what changed without opening eBay.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Today the dashboard runs in the current single seller installation. Screens on this page show sample data.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-package"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Products</h4><p class="body-6 muted">Open any product to see every past supplier check and what ELM read. Archive one you no longer sell and restore it later.</p><p class="feat-benefit body-5">Every product keeps its full history.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Delete one at a time or up to 200 at once, with a preview first, and restore if you change your mind. Deleting changes ELM's records only and never ends or changes the eBay listing.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-storefront"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Suppliers</h4><p class="body-6 muted">Pause a supplier, keep a supplier out of eBay sync, and add notes, all from the dashboard.</p><p class="feat-benefit body-5">Handle a problem supplier in one click.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Pausing a supplier stops its checks, so its synced listings go to 0 when the 24 hour hold ends.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-tag"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Listings</h4><p class="body-6 muted">Search your eBay listings and mappings and see the newest first.</p><p class="feat-benefit body-5">Find any listing and what it is linked to.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">If you end a listing on eBay, ELM notices, usually within two hours, stops syncing it and tells you.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-magnifying-glass"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Search and filters</h4><p class="body-6 muted">Find any product fast with search and filters for supplier, stock status, failing checks and mapping.</p><p class="feat-benefit body-5">Go straight to the products that need you.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Saved filters are coming at launch.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-list-checks"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Decisions and logs</h4><p class="body-6 muted">See every decision ELM made, including the ones where it chose not to change anything, with the reason.</p><p class="feat-benefit body-5">Nothing changes on eBay without a reason you can read.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Every eBay call, failed check and notification is logged, and an audit log records who changed what and when.</p></details></article>
+          <article class="feat" data-status="today"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-bell"/></svg></span><span class="status status-today caption-3">Works today</span></div><h4 class="title-2">Telegram notifications</h4><p class="body-6 muted">Alerts when an eBay update fails, when you change a listing yourself, or when a listing needs your attention.</p><p class="feat-benefit body-5">Hear about the things that need you, on your phone.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">One Telegram chat today. There is no message for every quantity change. For products you monitor without syncing, ELM alerts you when a supplier sells out or restocks.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-envelope-simple"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Email notifications</h4><p class="body-6 muted">Get ELM alerts by email as well as Telegram.</p><p class="feat-benefit body-5">Alerts where you already work.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-clock-counter-clockwise"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Activity history</h4><p class="body-6 muted">An activity history that shows what ELM changed for you over time.</p><p class="feat-benefit body-5">See the work ELM did across weeks, not just today.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-tray"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Exceptions inbox</h4><p class="body-6 muted">One inbox for every listing and supplier that needs your attention.</p><p class="feat-benefit body-5">Start each day with a short list instead of a search.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-selection-all"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Bulk operations</h4><p class="body-6 muted">Select many listings and pause sync, resume it or apply a rule in one action. Save your filters.</p><p class="feat-benefit body-5">Change hundreds of listings as easily as one.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet beyond bulk delete of products, which works today.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-users-three"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Multi account management</h4><p class="body-6 muted">Connect more than one eBay account and keep their rules and limits apart.</p><p class="feat-benefit body-5">Run every store from one login.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Today ELM works with one eBay account.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-user-circle"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Your own ELM account</h4><p class="body-6 muted">Each seller gets their own private ELM account. Sign up, connect eBay and start without a setup call.</p><p class="feat-benefit body-5">Set up on your own schedule.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Today ELM runs as one installation set up for one seller.</p></details></article>
+          <article class="feat" data-status="launch"><div class="feat-top"><span class="feat-ico"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-credit-card"/></svg></span><span class="status status-launch caption-3">Coming at launch</span></div><h4 class="title-2">Subscription management</h4><p class="body-6 muted">Choose, change or cancel your plan yourself.</p><p class="feat-benefit body-5">Move up a plan as your catalog grows.</p><details class="feat-more"><summary class="caption-1">Details</summary><p class="caption-2 muted">Not available yet. Nothing is charged before launch.</p></details></article>
+        </div>
+      </div>
+      <p class="caption-5 muted feat-empty" id="feat-empty" hidden>No features with this status in this group. Pick another group or show all.</p>
+    </div>
+  </section>
+
+  <!-- 6 DEMOS: data driven, see DEMOS in site.js -->
+  <section class="section" id="demos" aria-labelledby="demos-title">
+    <div class="container">
+      <p class="eyebrow caption-3">Product demos</p>
+      <h2 id="demos-title" class="heading-3 section-title reveal">See each workflow up close</h2>
+      <p class="section-sub body-3 muted reveal">Step through each workflow with sample data. Screens marked concept preview show features planned for launch.</p>
+      <div class="tabs tabs-scroll" role="tablist" aria-label="Product demos" id="demo-tabs"></div>
+      <div class="demo-frame" id="demo-panel" role="tabpanel" data-src="static/video/demos/">
+        <p class="body-6 muted demo-nojs">Turn on JavaScript to step through the demos.</p>
       </div>
     </div>
   </section>
 
-  <!-- PRICING -->
+  <!-- 7 WHY ELM -->
+  <section class="section" id="why" aria-labelledby="why-title">
+    <div class="container">
+      <p class="eyebrow caption-3">Why ELM</p>
+      <h2 id="why-title" class="heading-3 section-title reveal">What changes when ELM does the watching</h2>
+      <ul class="why-grid">
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-eye"/></svg><h3 class="title-2">Less manual checking</h3><p class="body-6 muted">ELM checks every mapped variation on a schedule, so you stop opening supplier pages one by one.</p></li>
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-lightning"/></svg><h3 class="title-2">Faster reaction to stock changes</h3><p class="body-6 muted">A verified sold out reading lowers eBay on that check, without waiting for you.</p></li>
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-shield-check"/></svg><h3 class="title-2">Less risk of selling what you can't get</h3><p class="body-6 muted">ELM helps prevent overselling, and every rule leans toward caution when a check is unclear.</p></li>
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-squares-four"/></svg><h3 class="title-2">Inventory in one place</h3><p class="body-6 muted">Listings, suppliers, mappings and alerts live in one dashboard instead of tabs and spreadsheets.</p></li>
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-paper-plane-tilt"/></svg><h3 class="title-2">More efficient listing work</h3><p class="body-6 muted">At launch, start from listing drafts built from supplier products and review them, instead of a blank form.</p><span class="status status-launch caption-3">Coming at launch</span></li>
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-binoculars"/></svg><h3 class="title-2">Clear view of supplier availability</h3><p class="body-6 muted">Every check, failed check and decision is recorded with its reason, so you can see which supplier pages could not be read, and why.</p></li>
+        <li class="why reveal"><svg class="i i-lg" aria-hidden="true"><use href="static/img/icons.svg#i-stack"/></svg><h3 class="title-2">Large catalogs within reach</h3><p class="body-6 muted">Variation level rules and SKU checks today; bulk import, bulk mapping and bulk actions at launch.</p></li>
+      </ul>
+      <p class="caption-5 muted why-note">No results here are measured or promised. They are what the rules above are designed to do.</p>
+    </div>
+  </section>
+
+  <!-- 8 FOUNDER STORY -->
+  <section class="section story-sec" id="story" aria-labelledby="story-title">
+    <div class="container story-grid">
+      <div class="story-visual reveal" aria-hidden="true">
+        <img src="brand/logo/elm-mark.svg" alt="" width="160" height="160">
+        <svg class="story-pulse" viewBox="0 0 320 64" preserveAspectRatio="none"><path d="M0 32 H110 L126 10 L146 56 L164 20 L178 32 H320"/></svg>
+        <p class="caption-4 muted">From one supplier monitor to ELM</p>
+      </div>
+      <div class="story-copy">
+        <p class="eyebrow caption-3">Our story</p>
+        <h2 id="story-title" class="heading-3 reveal">ELM started with one freelance job</h2>
+        <p class="body-3 muted">Ahmed, a developer, was helping a client who sold on eBay and bought from suppliers with their own websites. The brief was narrow: monitor supplier stock.</p>
+        <p class="body-3 muted">While building it, he saw the bigger problem. Nobody can watch every supplier product all day. When a supplier sells out while the seller is busy, away or asleep, the eBay listing keeps taking orders, and those orders turn into avoidable cancellations.</p>
+        <p class="body-3 muted">So he built something that handles the repetitive watching automatically, with rules a seller can see, check and overrule. That stock monitor is the engine ELM runs on today. Now it is growing into ELM Easy Monitoring, a wider eBay automation service with one purpose: less time on repetitive tasks, more time growing your business.</p>
+        <p class="title-4 story-sign">Founder · Ahmed</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 PRICING -->
   <section class="section" id="pricing" aria-labelledby="pricing-title">
     <div class="container">
       <p class="eyebrow caption-3">Pricing</p>
@@ -387,29 +506,95 @@
     </div>
   </section>
 
-  <!-- FAQ -->
+  <!-- 10 WAITLIST -->
+  <section class="section waitlist" id="waitlist" aria-labelledby="waitlist-title">
+    <div class="container waitlist-grid">
+      <div class="waitlist-copy">
+        <p class="eyebrow caption-3">Early access</p>
+        <h2 id="waitlist-title" class="heading-3">Join the early access waitlist</h2>
+        <p class="body-3 muted">We are opening ELM to a small group of eBay sellers first. Join the list and we will email you when your place is ready.</p>
+        <ul class="benefits">
+          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">Priority access before public launch</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">Early access to new features as they ship</span></li>
+          <li><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-check"/></svg><span class="body-5">A direct line to the people building it</span></li>
+        </ul>
+        <p class="caption-5 muted">Early access benefits will be confirmed by email before launch. Nothing on this page is a binding offer.</p>
+      </div>
+
+      <div class="waitlist-card">
+        <div class="counter" id="counter">
+          <div class="counter-head">
+            <span class="caption-4 muted" id="counter-label">Verified signups</span>
+            <span class="demo-flag caption-3" id="demo-flag" hidden>Design preview · sample number</span>
+          </div>
+          <p class="counter-num"><span class="heading-2 mono" id="counter-value">0</span><span class="title-2 muted mono"> / <span id="counter-goal">250</span></span></p>
+          <div class="bar" role="progressbar" aria-labelledby="counter-label" aria-valuemin="0" aria-valuemax="250" aria-valuenow="0" id="counter-bar">
+            <div class="bar-fill" id="bar-fill"></div>
+            <div class="bar-marks" id="bar-marks" aria-hidden="true"></div>
+          </div>
+          <ol class="milestones caption-4" id="milestones" aria-label="Milestones"></ol>
+          <p class="caption-5 muted" id="counter-note">Counts people who confirmed their email. Updated live.</p>
+        </div>
+
+        <form class="form" id="waitlist-form" novalidate>
+          <label class="title-4" for="email">Work email</label>
+          <div class="field">
+            <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254" placeholder="you@yourstore.com" aria-describedby="email-error" class="body-3">
+          </div>
+          <p class="error caption-2" id="email-error" role="alert" hidden></p>
+          <label class="title-4" for="plan">Plan you are interested in <span class="caption-5 muted">(optional)</span></label>
+          <div class="field">
+            <select id="plan" name="plan" class="body-3">
+              <option value="">Not sure yet</option>
+              <option value="starter">Starter · $19/month · up to 100 variations</option>
+              <option value="growth">Growth · $39/month · up to 300 variations</option>
+              <option value="pro">Pro · $79/month · up to 1,000 variations</option>
+              <option value="business">Business · $149/month · up to 3,000 variations</option>
+            </select>
+          </div>
+          <p class="caption-5 muted plan-note" id="plan-note" hidden></p>
+          <div class="hp" aria-hidden="true"><label for="company_website">Leave this empty</label><input id="company_website" name="company_website" type="text" tabindex="-1" autocomplete="off"></div>
+          <label class="consent caption-2"><input type="checkbox" id="consent" name="consent" required aria-describedby="consent-error"><span>Email me about ELM early access. I can unsubscribe at any time. Read the <a href="privacy.html">privacy notice</a>.</span></label>
+          <p class="error caption-2" id="consent-error" role="alert" hidden></p>
+          <button class="btn btn-primary button-md btn-block" type="submit" id="submit"><span class="btn-label">Join the waitlist</span></button>
+          <p class="error caption-2" id="form-error" role="alert" hidden></p>
+        </form>
+        <div class="success" id="success" hidden tabindex="-1">
+          <svg class="i i-lg green" aria-hidden="true"><use href="static/img/icons.svg#i-envelope"/></svg>
+          <h3 class="heading-6" id="success-title">Check your inbox</h3>
+          <p class="body-6 muted" id="success-text">We sent a confirmation link to <strong id="success-email"></strong>. Your place counts once you confirm it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 FAQ (keep the FAQPage JSON-LD in <head> in sync: tools in site/tests check it) -->
   <section class="section" id="faq" aria-labelledby="faq-title">
     <div class="container narrow">
       <p class="eyebrow caption-3">FAQ</p>
       <h2 id="faq-title" class="heading-3 section-title">Questions sellers ask</h2>
       <div class="faq" id="faq-list">
-        <details><summary class="title-3">What does ELM automate?</summary><p class="body-6 muted">Today ELM watches your suppliers' product pages and updates the available quantity on your existing eBay listings and variations, with safety rules and a log of every change. At launch it adds product discovery, listing creation, SKU generation, smart mapping and bulk tools.</p></details>
-        <details><summary class="title-3">Does it work with Shopify suppliers?</summary><p class="body-6 muted">Yes. ELM is built for suppliers whose online stores run on Shopify. Some stores hide stock levels or block automated checks; ELM tells you when a store cannot be read reliably instead of guessing.</p></details>
-        <details><summary class="title-3">Can it create eBay listings?</summary><p class="body-6 muted">Listing creation is coming at launch. ELM will prepare listings from supplier products with titles, item specifics, variations and SKUs, and you review them before they go live. It is not available yet.</p></details>
-        <details><summary class="title-3">Does it generate SKUs?</summary><p class="body-6 muted">Automatic SKU generation is coming at launch. Today ELM reads the SKUs you already have and suggests mappings when they match exactly.</p></details>
+        <details><summary class="title-3">How does ELM work?</summary><p class="body-6 muted">You link each eBay variation to the supplier variant it depends on. ELM then checks the supplier's Shopify store on a schedule, every 60 minutes by default. When a variant sells out, it sets the matching eBay quantity to 0, and when a restock is confirmed by a second check, it sets it back to 1. Every change is read back from eBay and recorded with its reason.</p></details>
+        <details><summary class="title-3">Does it work with every Shopify supplier?</summary><p class="body-6 muted">ELM is built for suppliers whose online stores run on Shopify, and it reads each product's live data. It cannot promise every store: some hide stock levels or block automated checks. When a store cannot be read reliably, ELM shows the failed check and its reason instead of guessing, and it never tries to get around a block.</p></details>
+        <details><summary class="title-3">What does ELM change on my eBay listings?</summary><p class="body-6 muted">Only the available quantity, and only to 0 or 1 per variation. ELM never ends, deletes or reprices your listings. If a variation shows more than 1, ELM leaves that quantity alone unless you allow it. Today it works with fixed price, Good 'Til Cancelled listings; auctions are not supported.</p></details>
+        <details><summary class="title-3">Does ELM buy products for me?</summary><p class="body-6 muted">No. ELM never buys from your suppliers or completes a checkout. Purchasing stays with you, and you are responsible for following eBay's selling policies.</p></details>
+        <details><summary class="title-3">What happens when a supplier goes out of stock?</summary><p class="body-6 muted">On that check ELM sets the matching eBay quantity to 0 and records why. It first checks that eBay's Out-of-Stock Control is on, so the listing stays live while sold out. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing.</p></details>
+        <details><summary class="title-3">What safety protections does ELM have?</summary><p class="body-6 muted">You can start in dry run and see every change before anything is sent to eBay. A failed check holds the last quantity for a set window, 24 hours by default, instead of zeroing your listing. If you change a quantity on eBay yourself, ELM holds off on that listing for 24 hours and tells you. One switch pauses every eBay change, and built in limits cap how many changes ELM can send per hour and per listing.</p></details>
         <details><summary class="title-3">Can it monitor product variations?</summary><p class="body-6 muted">Yes, and this works today. Every check and every stock change is per variation, so one size or color can sell out without touching the others.</p></details>
-        <details><summary class="title-3">What happens when a supplier goes out of stock?</summary><p class="body-6 muted">On the next check ELM sets the matching eBay quantity to zero and records why. When the supplier restocks, ELM confirms it with a second check before selling again. If a check simply fails, ELM holds the last known quantity for a set time instead of zeroing your listing.</p></details>
-        <details><summary class="title-3">Does ELM purchase products automatically?</summary><p class="body-6 muted">No. ELM never buys from your suppliers or completes a checkout. You stay in control of where and how you buy, and you are responsible for following eBay's selling policies.</p></details>
-        <details><summary class="title-3">Can I manage many listings at once?</summary><p class="body-6 muted">Monitoring and sync already run across all mapped listings. Bulk import and bulk listing management arrive at launch.</p></details>
-        <details><summary class="title-3">How does early access work?</summary><p class="body-6 muted">Join the waitlist with your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch.</p></details>
+        <details><summary class="title-3">How does mapping work?</summary><p class="body-6 muted">Today you link each eBay variation to its supplier variant, and ELM suggests the link when your eBay SKU and the supplier SKU match exactly. Only a mapping you have verified can change your eBay stock. Coming at launch: matching by option values and title, match suggestions within the supplier stores you add, and bulk accept, with uncertain matches sent to a review queue.</p></details>
+        <details><summary class="title-3">Does it generate SKUs?</summary><p class="body-6 muted">Automatic SKU generation is coming at launch: ELM will generate a consistent SKU for every variation that does not have one. Today ELM reads the SKUs you already have, suggests mappings when they match exactly, and flags missing or duplicate SKUs so they stay out of sync until you fix them.</p></details>
+        <details><summary class="title-3">What is Auto Listing?</summary><p class="body-6 muted">Auto Listing is coming at launch and is not available yet. You will browse a supplier's catalog, filter by supplier price and choose products, and ELM will prepare eBay listing drafts with variations, images matched to each variation and SKUs. You review each draft, and ELM publishes it to eBay only when you approve. Eligible new listings are then connected to stock sync. Use only images and descriptions you have the right to use.</p></details>
+        <details><summary class="title-3">Can I manage many listings at once?</summary><p class="body-6 muted">Monitoring and sync already run across all mapped listings, and you can delete up to 200 products from ELM at once with a preview first. Bulk import, bulk mapping and bulk actions on listings arrive at launch.</p></details>
+        <details><summary class="title-3">What do the plans cost?</summary><p class="body-6 muted">Starter is $19 a month for up to 100 managed variations, Growth is $39 for 300, Pro is $79 for 1,000 and Business is $149 for 3,000. Every plan includes every feature; plans differ only in how many variations ELM manages for you.</p></details>
         <details><summary class="title-3">How are managed variations counted?</summary><p class="body-6 muted">Each eBay variation ELM manages counts as one, and a single item listing counts as one. A listing with 50 variations counts as 50. Your plan limit applies to the total across all your active listings.</p></details>
         <details><summary class="title-3">Am I charged when I join the waitlist?</summary><p class="body-6 muted">No. Joining is free, and picking a plan only tells us what fits your store. Nothing is charged before launch, and you choose your plan when your access is ready.</p></details>
         <details><summary class="title-3">Will there be a free trial?</summary><p class="body-6 muted">Yes, a free trial is planned for launch. Its length will be announced before launch.</p></details>
+        <details><summary class="title-3">How does early access work?</summary><p class="body-6 muted">Join the waitlist with your email. We will invite sellers in small groups before public launch and email you when your place is ready. Early access benefits will be confirmed by email before launch.</p></details>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- 12 CONTACT -->
   <section class="section" id="contact" aria-labelledby="contact-title">
     <div class="container contact-grid">
       <div class="contact-copy">
@@ -463,27 +648,25 @@
       <img src="brand/logo/elm-logo-on-dark.svg" alt="ELM" width="86" height="26">
       <p class="caption-5 muted">ELM Easy Monitoring. Stock sync for eBay sellers whose suppliers run on Shopify.</p>
     </div>
-    <nav aria-label="Legal" class="footer-links caption-2">
-      <a href="#pricing">Pricing</a>
-      <a href="#contact">Contact</a>
-      <a href="privacy.html">Privacy</a>
-      <!-- contact-email --><a href="mailto:ahmedmoghny212@gmail.com">ahmedmoghny212@gmail.com</a><!-- /contact-email -->
+    <nav aria-label="Footer" class="footer-cols caption-2">
+      <div class="footer-links">
+        <a href="#solution">Product</a>
+        <a href="#features">Features</a>
+        <a href="#demos">Demos</a>
+        <a href="#story">Our story</a>
+      </div>
+      <div class="footer-links">
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="privacy.html">Privacy</a>
+        <!-- contact-email --><a href="mailto:ahmedmoghny212@gmail.com">ahmedmoghny212@gmail.com</a><!-- /contact-email -->
+      </div>
     </nav>
   </div>
   <div class="container">
     <p class="caption-5 muted legal">eBay is a trademark of eBay Inc. Shopify is a trademark of Shopify Inc. ELM is independent and is not affiliated with or endorsed by eBay or Shopify. Product screens show sample data.</p>
   </div>
 </footer>
-
-<div class="modal" id="video-modal" role="dialog" aria-modal="true" aria-labelledby="video-title" hidden>
-  <div class="modal-box">
-    <div class="modal-head"><h2 id="video-title" class="title-2">ELM product tour</h2><button class="icon-btn" type="button" data-close-video aria-label="Close"><svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-x"/></svg></button></div>
-    <div class="video-wrap" id="video-wrap">
-      <video id="tour" controls playsinline preload="none" data-src="static/video/elm-intro.mp4" data-poster="static/video/elm-intro-cover.png" data-captions="static/video/elm-intro.vtt"></video>
-      <p class="body-6 muted video-missing" id="video-missing" hidden>The product tour is being finished. Join the waitlist and we will send it to you.</p>
-    </div>
-    <p class="caption-5 muted">Shows sample data. Screens marked concept preview are planned for launch.</p>
-  </div>
-</div>
 </body>
 </html>

@@ -6,7 +6,6 @@
   const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const params = new URLSearchParams(location.search);
-  const ICON = (name) => `<svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-${name}"/></svg>`;
   const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
   // ------------------------------------------------------------ privacy-conscious analytics
@@ -44,7 +43,7 @@
       menu.hidden = false;
       const links = $$('a', menu);
       const step = Math.min(60, 400 / Math.max(1, links.length));
-      links.forEach((a, i) => { a.style.transitionDelay = reduced ? '0ms' : `${i * step}ms`; });
+      links.forEach((a, i) => { a.style.transitionDelay = reduced ? '0ms' : `${Math.round(i * step)}ms`; });
       requestAnimationFrame(() => menu.classList.add('open'));
       document.body.style.overflow = 'hidden';
     } else {
@@ -57,6 +56,7 @@
   menu.addEventListener('click', (e) => { if (e.target.closest('a')) setMenu(false); });
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') { setMenu(false); toggle.focus(); } });
 
+  // the nav marks the section being read
   const navLinks = $$('.nav-links a');
   const sectionObserver = new IntersectionObserver((entries) => {
     entries.forEach((en) => {
@@ -64,7 +64,7 @@
       navLinks.forEach((a) => a.setAttribute('aria-current', String(a.getAttribute('href') === `#${en.target.id}`)));
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['product', 'features', 'how', 'faq'].forEach((id) => { const el = document.getElementById(id); if (el) sectionObserver.observe(el); });
+  navLinks.forEach((a) => { const el = document.getElementById(a.getAttribute('href').slice(1)); if (el) sectionObserver.observe(el); });
 
   // ------------------------------------------------------------ scroll reveals (once)
   const revealObserver = new IntersectionObserver((entries, obs) => {
@@ -95,17 +95,130 @@
     }
   }
 
-  // ------------------------------------------------------------ hero preview: a live activity feed with sample data
+  // ------------------------------------------------------------ accessible tabs (arrow keys, Home, End)
+  function wireTabs(list, onSelect) {
+    const tabs = $$('[role="tab"]', list);
+    function select(tab, focus) {
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
+        if (panel && panel.dataset.shared !== 'true') panel.hidden = !on;
+      });
+      if (focus) tab.focus();
+      if (onSelect) onSelect(tab);
+    }
+    tabs.forEach((t, i) => {
+      t.addEventListener('click', () => select(t, false));
+      t.addEventListener('keydown', (e) => {
+        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
+        if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
+        if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
+        if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
+      });
+    });
+    return select;
+  }
+  const st = (kind, label) => `<span class="st st-${kind} caption-4">${label}</span>`;
+
+  // ------------------------------------------------------------ hero product tour: nothing loads until Play is pressed
+  const video = $('#tour');
+  const playBtn = $('#tour-play');
+  let tourAttached = null;
+  async function attachTour() {
+    // attach media only once the file exists, so a missing render never produces broken requests
+    const r = await fetch(video.dataset.src, { method: 'HEAD' });
+    if (!r.ok) throw new Error('missing');
+    const cap = await fetch(video.dataset.captions, { method: 'HEAD' }).catch(() => null);
+    if (cap && cap.ok) {
+      const t = document.createElement('track');
+      Object.assign(t, { kind: 'captions', src: video.dataset.captions, srclang: 'en', label: 'English', default: true });
+      video.append(t);
+    }
+    video.poster = video.dataset.poster;
+    video.preload = 'auto';
+    video.src = video.dataset.src;
+  }
+  if (video && playBtn) {
+    playBtn.addEventListener('click', async () => {
+      track('demo_open');
+      playBtn.disabled = true;
+      try {
+        tourAttached = tourAttached || attachTour();
+        await tourAttached;
+        video.hidden = false;
+        playBtn.hidden = true;
+        video.focus({ preventScroll: true });
+        await video.play().catch(() => { /* the visitor can press play on the controls */ });
+      } catch {
+        playBtn.hidden = true;
+        $('#video-missing').hidden = false;
+      }
+    });
+  }
+
+  // ------------------------------------------------------------ the problem, solved: supplier -> ELM -> eBay
+  const FLOW = {
+    'fl-out': {
+      s: ['Trail Jacket · Navy / M', st('out', 'Sold out'), 'Read on the scheduled check'],
+      checks: [['ok', 'Mapping verified by you'], ['ok', 'Sync is on for this variation'], ['ok', 'eBay Out-of-Stock Control is on']],
+      verdict: 'Lower now, on this check', qty: ['1', '0', 'out'], note: 'Written, then read back from eBay',
+      outcome: 'The listing stays live as sold out, so buyers can\'t order a variation your supplier no longer has.' },
+    'fl-restock': {
+      s: ['Trail Jacket · Navy / M', st('in', 'In stock'), 'Back in stock at the supplier'],
+      checks: [['ok', 'First check: in stock'], ['ok', 'Second check, about 10 minutes later: still in stock'], ['ok', 'Mapping verified and sync on']],
+      verdict: 'Restock confirmed', qty: ['0', '1', 'in'], note: 'Written, then read back from eBay',
+      outcome: 'Your listing sells again once the restock is confirmed. A brief glitch on the supplier page does not reopen sales.' },
+    'fl-fail': {
+      s: ['Stoneware Mug Set · Slate', st('unk', 'Check failed'), 'The supplier page did not answer'],
+      checks: [['warn', 'Check failed, so stock is unknown'], ['ok', 'A failed check is never read as sold out'], ['ok', 'Retry on the next check']],
+      verdict: 'Hold the last quantity', qty: ['1', '1', 'hold'], note: 'Held for a set window, 24 hours by default',
+      outcome: 'A slow or blocked supplier page does not empty your listing. If the supplier still cannot be read after 24 hours, ELM lowers the quantity to 0.' },
+    'fl-edit': {
+      s: ['Canvas Weekender · Olive', st('in', 'In stock'), 'Checked as usual'],
+      checks: [['warn', 'You changed this quantity on eBay'], ['ok', 'Hold off on this listing for 24 hours'], ['ok', 'Tell you on Telegram']],
+      verdict: 'Your edit stays', qty: [null, '0', 'mine', 'Set by you'], note: 'ELM steps aside, then normal sync resumes by itself',
+      outcome: 'You can step in by hand at any time. ELM does not overwrite your change, and it tells you it is holding off.' },
+    'fl-mine': {
+      s: ['Trail Jacket · Olive / L', st('in', 'In stock'), 'Checked as usual'],
+      checks: [['ok', 'Supplier has stock'], ['warn', 'eBay shows 3, a quantity you set'], ['ok', 'ELM only ever writes 0 or 1']],
+      verdict: 'Leave it to you', qty: [null, '3', 'mine', 'Left to you'], note: 'Unless you allow ELM to manage it',
+      outcome: 'Quantities above 1 that you set stay yours. ELM leaves them alone unless you allow it.' },
+  };
+  const flowPanel = $('#flow-panel');
+  if (flowPanel) {
+    const set = (k, html) => { $(`[data-f="${k}"]`, flowPanel).innerHTML = html; };
+    const ICON_ARROW = '<svg class="i" aria-hidden="true"><use href="static/img/icons.svg#i-arrow-right"/></svg>';
+    function renderFlow(id, animate) {
+      const f = FLOW[id];
+      flowPanel.setAttribute('aria-labelledby', id);
+      set('s-item', esc(f.s[0])); set('s-state', f.s[1]); set('s-note', esc(f.s[2]));
+      set('e-checks', f.checks.map(([k, t]) => `<li class="${k} caption-2">${esc(t)}</li>`).join(''));
+      set('e-verdict', esc(f.verdict));
+      set('b-item', esc(f.s[0]));
+      const [from, to, cls, tag] = f.qty;
+      set('b-qty', (from !== null ? `<span class="from">${from}</span>${ICON_ARROW}` : '') + `<span class="to to-${cls}">${to}</span>` + (tag ? `<span class="qty-tag caption-4">${esc(tag)}</span>` : ''));
+      set('b-note', esc(f.note));
+      $('#flow-outcome').textContent = f.outcome;
+      flowPanel.classList.remove('play');
+      if (animate && !reduced) { void flowPanel.offsetWidth; flowPanel.classList.add('play'); }
+    }
+    wireTabs($('#flow-tabs'), (tab) => { renderFlow(tab.id, true); track('flow_tab', tab.id); });
+    new IntersectionObserver(([en], obs) => { if (en.isIntersecting) { renderFlow($('#flow-tabs [aria-selected="true"]').id, true); obs.disconnect(); } }, { threshold: 0.4 }).observe(flowPanel);
+  }
+
+  // ------------------------------------------------------------ live activity feed (sample data)
   const feed = $('#hero-feed');
   const rows = $$('#hero-rows tr');
   const events = [
-    { cls: 'ev-out', row: 0, st: ['st-out', 'Sold out'], q: '0', text: 'Trail Jacket · Navy / M', sub: 'Supplier sold out. eBay quantity 3 → 0' },
-    { cls: 'ev-hold', row: 2, st: ['st-unk', 'Check failed'], q: '2 <span class="caption-5 muted">held</span>', text: 'Stoneware Mug Set · Slate', sub: 'Check failed. Holding quantity, retry in 15 min' },
-    { cls: 'ev-in', row: 3, st: ['st-in', 'In stock'], q: '2', text: 'Merino Crew Socks · Grey / L', sub: 'Restock confirmed twice. eBay quantity 0 → 2' },
-    { cls: 'ev-in', row: 0, st: ['st-in', 'In stock'], q: '3', text: 'Trail Jacket · Navy / M', sub: 'Restock confirmed twice. eBay quantity 0 → 3' },
-    { cls: 'ev-out', row: 1, st: ['st-out', 'Sold out'], q: '0', text: 'Canvas Weekender · Olive', sub: 'Supplier sold out. eBay quantity 2 → 0' },
-    { cls: 'ev-in', row: 1, st: ['st-in', 'In stock'], q: '2', text: 'Canvas Weekender · Olive', sub: 'Restock confirmed twice. eBay quantity 0 → 2' },
-    { cls: 'ev-out', row: 3, st: ['st-out', 'Sold out'], q: '0', text: 'Merino Crew Socks · Grey / L', sub: 'Supplier sold out. eBay quantity 2 → 0' },
+    { cls: 'ev-out', row: 0, st: ['st-out', 'Sold out'], q: '0', text: 'Trail Jacket · Navy / M', sub: 'Supplier sold out. eBay quantity 1 → 0' },
+    { cls: 'ev-hold', row: 2, st: ['st-unk', 'Check failed'], q: '1 <span class="caption-5 muted">held</span>', text: 'Stoneware Mug Set · Slate', sub: 'Check failed. Holding quantity, retry in 15 min' },
+    { cls: 'ev-in', row: 3, st: ['st-in', 'In stock'], q: '1', text: 'Merino Crew Socks · Grey / L', sub: 'Restock confirmed twice. eBay quantity 0 → 1' },
+    { cls: 'ev-in', row: 0, st: ['st-in', 'In stock'], q: '1', text: 'Trail Jacket · Navy / M', sub: 'Restock confirmed twice. eBay quantity 0 → 1' },
+    { cls: 'ev-out', row: 1, st: ['st-out', 'Sold out'], q: '0', text: 'Canvas Weekender · Olive', sub: 'Supplier sold out. eBay quantity 1 → 0' },
+    { cls: 'ev-in', row: 1, st: ['st-in', 'In stock'], q: '1', text: 'Canvas Weekender · Olive', sub: 'Restock confirmed twice. eBay quantity 0 → 1' },
+    { cls: 'ev-out', row: 3, st: ['st-out', 'Sold out'], q: '0', text: 'Merino Crew Socks · Grey / L', sub: 'Supplier sold out. eBay quantity 1 → 0' },
   ];
   let evIndex = 0;
   let changes = 37;
@@ -120,9 +233,9 @@
     while (feed.children.length > 4) feed.lastElementChild.remove();
     const row = rows[ev.row];
     if (row) {
-      const st = row.querySelector('.st');
-      st.className = `st ${ev.st[0]} caption-4`;
-      st.textContent = ev.st[1];
+      const s = row.querySelector('.st');
+      s.className = `st ${ev.st[0]} caption-4`;
+      s.textContent = ev.st[1];
       row.querySelector('.q').innerHTML = ev.q;
       row.classList.remove('flash', 'flash-out');
       void row.offsetWidth;
@@ -134,135 +247,198 @@
     for (let i = 0; i < 3; i += 1) pushEvent(false);
     if (!reduced) {
       let timer = null;
-      const heroObs = new IntersectionObserver(([en]) => {
+      new IntersectionObserver(([en]) => {
         if (en.isIntersecting && !timer) timer = setInterval(pushEvent, 2800);
         if (!en.isIntersecting && timer) { clearInterval(timer); timer = null; }
-      });
-      heroObs.observe($('.app-frame'));
+      }).observe($('.app-frame'));
     }
   }
 
-  // ------------------------------------------------------------ accessible tabs
-  function wireTabs(list, onSelect) {
-    const tabs = $$('[role="tab"]', list);
-    function select(tab, focus) {
-      tabs.forEach((t) => {
-        const on = t === tab;
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-        const panel = document.getElementById(t.getAttribute('aria-controls'));
-        if (panel && panel.dataset.shared !== 'true') panel.hidden = !on;
-      });
-      if (focus) tab.focus();
-      onSelect && onSelect(tab);
-    }
-    tabs.forEach((t, i) => {
-      t.addEventListener('click', () => select(t, false));
-      t.addEventListener('keydown', (e) => {
-        const d = e.key === 'ArrowRight' ? 1 : e.key === 'ArrowLeft' ? -1 : 0;
-        if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
-        if (e.key === 'Home') { e.preventDefault(); select(tabs[0], true); }
-        if (e.key === 'End') { e.preventDefault(); select(tabs[tabs.length - 1], true); }
-      });
-    });
-    return select;
+  // ------------------------------------------------------------ features: four categories plus a status filter
+  const featTabs = $('#feat-tabs');
+  if (featTabs) {
+    const section = $('#features');
+    const empty = $('#feat-empty');
+    const updateEmpty = () => {
+      const panel = $('.feat-panel:not([hidden])', section);
+      const f = section.dataset.filter || 'all';
+      empty.hidden = !panel || f === 'all' || $$(`.feat[data-status="${f}"]`, panel).length > 0;
+    };
+    const selectFeat = wireTabs(featTabs, (tab) => { updateEmpty(); track('feature_tab', tab.id); });
+    selectFeat($('[role="tab"]', featTabs), false);
+    $$('#feat-filter [data-filter]').forEach((b) => b.addEventListener('click', () => {
+      $$('#feat-filter [data-filter]').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+      section.dataset.filter = b.dataset.filter;
+      updateEmpty();
+      track('feature_filter', b.dataset.filter);
+    }));
   }
 
-  // workflows: steps light up one after another while visible
-  function lightPipeline(panel) {
-    const steps = $$('.pipeline li', panel);
-    steps.forEach((s) => s.classList.remove('lit'));
-    if (reduced) { steps.forEach((s) => s.classList.add('lit')); return; }
-    $$('.pipeline', panel).forEach((pipe, p) => {
-      $$('li', pipe).forEach((li, i) => setTimeout(() => li.classList.add('lit'), 250 + p * 900 + i * 380));
-    });
-  }
-  const wfTabs = $('#product .tabs');
-  wireTabs(wfTabs, (tab) => { track('workflow_tab', tab.id); lightPipeline(document.getElementById(tab.getAttribute('aria-controls'))); });
-  const wfObs = new IntersectionObserver(([en], obs) => { if (en.isIntersecting) { lightPipeline($('#wf-sync')); obs.disconnect(); } }, { threshold: 0.35 });
-  wfObs.observe($('#wf-sync'));
-
-  // ------------------------------------------------------------ dashboard showcase (sample data)
-  const NOW = 'Today';
-  const sc = [
-    { id: 'inventory', name: 'Inventory', status: 'today', desc: 'Every monitored variant with its supplier status and the quantity on eBay.',
-      cols: ['Variant', 'SKU', 'Supplier', 'Supplier status', 'eBay qty', 'Last check'],
-      rows: [
-        ['Trail Jacket<span class="sub">Navy / M</span>', '<span class="mono">NFS-TJ-NV-M</span>', 'Northfield Supply', st('in', 'In stock'), '<span class="mono">3</span>', '<span class="mono">4 min ago</span>'],
-        ['Trail Jacket<span class="sub">Navy / L</span>', '<span class="mono">NFS-TJ-NV-L</span>', 'Northfield Supply', st('out', 'Sold out'), '<span class="mono">0</span>', '<span class="mono">4 min ago</span>'],
-        ['Canvas Weekender<span class="sub">Olive</span>', '<span class="mono">HPO-CW-OL</span>', 'Harbor &amp; Pine Outfitters', st('in', 'In stock'), '<span class="mono">2</span>', '<span class="mono">11 min ago</span>'],
-        ['Stoneware Mug Set<span class="sub">Slate, set of 4</span>', '<span class="mono">KH-SM-SL4</span>', 'Kestrel Home', st('unk', 'Check failed'), '<span class="mono">2</span> held', '<span class="mono">17 min ago</span>'],
-        ['Linen Throw<span class="sub">Sand</span>', '<span class="mono">KH-LT-SD</span>', 'Kestrel Home', st('pre', 'Pre order'), '<span class="mono">0</span>', '<span class="mono">23 min ago</span>'],
-      ] },
-    { id: 'products', name: 'Products', status: 'today', desc: 'Supplier products you track, with variants, check history and the eBay listings they feed.',
-      cols: ['Product', 'Supplier', 'Variants', 'In stock', 'Mapped to eBay', 'Interval'],
-      rows: [
-        ['Trail Jacket', 'Northfield Supply', '<span class="mono">12</span>', '<span class="mono">9</span>', '<span class="mono">12</span>', '60 min'],
-        ['Merino Crew Socks', 'Northfield Supply', '<span class="mono">8</span>', '<span class="mono">7</span>', '<span class="mono">8</span>', '60 min'],
-        ['Canvas Weekender', 'Harbor &amp; Pine Outfitters', '<span class="mono">3</span>', '<span class="mono">2</span>', '<span class="mono">3</span>', '30 min'],
-        ['Stoneware Mug Set', 'Kestrel Home', '<span class="mono">4</span>', '<span class="mono">3</span>', '<span class="mono">2</span>', '60 min'],
-      ] },
-    { id: 'listings', name: 'eBay listings', status: 'today', desc: 'Your active fixed price listings and variations, read from eBay, with what ELM can safely sync.',
-      cols: ['Listing', 'Variations', 'Mapped', 'Sync', 'Health'],
-      rows: [
-        ['Trail Jacket, water resistant, 6 colors<span class="sub">Fixed price · Good until cancelled</span>', '<span class="mono">12</span>', '<span class="mono">12 of 12</span>', st('in', 'On'), st('in', 'Ready')],
-        ['Canvas Weekender Bag<span class="sub">Fixed price · Good until cancelled</span>', '<span class="mono">3</span>', '<span class="mono">3 of 3</span>', st('in', 'On'), st('in', 'Ready')],
-        ['Stoneware Mug Set of 4<span class="sub">Fixed price · Good until cancelled</span>', '<span class="mono">4</span>', '<span class="mono">2 of 4</span>', st('unk', 'Partial'), st('unk', 'Needs SKUs')],
-      ] },
-    { id: 'suppliers', name: 'Suppliers', status: 'today', desc: 'Each supplier store, how reliably it answers, and controls to pause it or keep it out of sync.',
+  // ------------------------------------------------------------ product demos (data driven)
+  // To add a recorded demo: put <slug>.mp4 and <slug>.png (and optionally <slug>.vtt) in /static/video/demos/,
+  // then set src (and captions) on its entry below. Entries without a src, or whose file is missing (HEAD check),
+  // show the interactive preview instead, so the page never requests a file that is not there.
+  const REAL = 'Real ELM engine · sample data · test mode';
+  const CONCEPT = 'Concept preview · Coming at launch';
+  const q = (n) => `<span class="mono">${n}</span>`;
+  const sub = (a, b) => `${a}<span class="sub">${b}</span>`;
+  const DEMOS = [
+    { slug: 'monitoring-a-supplier', title: 'Monitoring a supplier', label: REAL, status: 'today', poster: 'monitoring-a-supplier.png', src: 'monitoring-a-supplier.mp4', captions: null,
+      desc: 'Each supplier store with its checks today, its failures and its state. You can pause a supplier or keep it out of eBay sync from here.',
       cols: ['Supplier', 'Products', 'Checks today', 'Failed', 'Last failure', 'State'],
       rows: [
-        ['Northfield Supply', '<span class="mono">41</span>', '<span class="mono">984</span>', '<span class="mono">3</span>', 'Timeout, 2:14 pm', st('in', 'Active')],
-        ['Harbor &amp; Pine Outfitters', '<span class="mono">17</span>', '<span class="mono">816</span>', '<span class="mono">0</span>', 'None', st('in', 'Active')],
-        ['Kestrel Home', '<span class="mono">23</span>', '<span class="mono">552</span>', '<span class="mono">19</span>', 'Blocked, 1:47 pm', st('unk', 'Cooling down')],
-      ] },
-    { id: 'mapping', name: 'Mapping', status: 'mixed', desc: 'Which supplier variant each eBay variation depends on. Exact SKU suggestions work today; matching by options and title is coming at launch.',
+        ['Northfield Supply', q(41), q(984), q(3), 'Timeout, 2:14 pm', st('in', 'Active')],
+        ['Harbor &amp; Pine Outfitters', q(17), q(816), q(0), 'None', st('in', 'Active')],
+        ['Kestrel Home', q(23), q(552), q(19), 'Blocked, 1:47 pm', st('unk', 'Cooling down')],
+      ],
+      steps: [[0, 'Northfield Supply is checked every 60 minutes. Three checks failed today, and each one held the last quantity instead of zeroing a listing.'],
+        [1, 'Harbor & Pine Outfitters is checked every 30 minutes, with no failures today.'],
+        [2, 'Kestrel Home blocked a check. ELM backs off and retries later instead of trying to get around the block.']] },
+    { slug: 'mapping-a-product', title: 'Mapping a product', label: REAL, status: 'mixed', concept: 'Option and title matching is a concept preview', poster: 'mapping-a-product.png', src: 'mapping-a-product.mp4', captions: null,
+      desc: 'Which supplier variant each eBay variation depends on. Exact SKU suggestions work today; matching by options and title is coming at launch.',
       cols: ['eBay variation', 'Supplier variant', 'Matched by', 'Confidence', 'State'],
       rows: [
-        ['Trail Jacket · Navy / M', 'Northfield Supply · Navy / M', 'Exact SKU', '<span class="mono">100%</span>', st('in', 'Verified')],
-        ['Trail Jacket · Navy / L', 'Northfield Supply · Navy / L', 'Exact SKU', '<span class="mono">100%</span>', st('in', 'Verified')],
-        ['Mug Set · Slate', 'Kestrel Home · Slate / 4 pack', 'Options and title', '<span class="mono">87%</span>', st('unk', 'Needs review')],
-        ['Mug Set · Sage', 'Kestrel Home · Sage / 4 pack', 'Options and title', '<span class="mono">91%</span>', st('unk', 'Needs review')],
-      ] },
-    { id: 'history', name: 'Automation history', status: 'today', desc: 'Every decision ELM made, what it changed on eBay, and why. Nothing happens without a recorded reason.',
+        ['Trail Jacket · Navy / M', 'Northfield Supply · Navy / M', 'Exact SKU', q('100%'), st('in', 'Verified')],
+        ['Trail Jacket · Navy / L', 'Northfield Supply · Navy / L', 'Exact SKU', q('100%'), st('in', 'Verified')],
+        ['Mug Set · Slate', 'Kestrel Home · Slate / 4 pack', 'Options and title', q('87%'), st('unk', 'Needs review')],
+        ['Mug Set · Sage', 'Kestrel Home · Sage / 4 pack', 'Options and title', q('91%'), st('unk', 'Needs review')],
+      ],
+      steps: [[[0, 1], 'Today: the eBay SKU and the supplier SKU match exactly, so ELM suggests the link and you verify it.'],
+        [[2, 3], 'At launch: matches by option values and title wait in a review queue until you approve them.'],
+        [[0, 1], 'Only verified mappings can change your eBay stock. Sync starts after the next successful supplier check.']] },
+    { slug: 'updating-stock', title: 'Updating stock', label: REAL, status: 'today', poster: 'updating-stock.png', src: 'updating-stock.mp4', captions: null,
+      desc: 'Every decision ELM made, what it changed on eBay, and why.',
       cols: ['When', 'Variation', 'Supplier', 'eBay qty', 'Reason', 'Result'],
       rows: [
-        [`<span class="mono">2:41 pm</span>`, 'Trail Jacket · Navy / L', st('out', 'Sold out'), '<span class="mono">2 → 0</span>', 'Supplier shows sold out', st('in', 'Written, read back')],
-        [`<span class="mono">2:14 pm</span>`, 'Stoneware Mug Set · Slate', st('unk', 'Check failed'), '<span class="mono">2 → 2</span>', 'Holding: check failed, retry at 2:29 pm', 'No change'],
-        [`<span class="mono">1:58 pm</span>`, 'Merino Crew Socks · Grey / L', st('in', 'In stock'), '<span class="mono">0 → 2</span>', 'Restock confirmed by a second check', st('in', 'Written, read back')],
-        [`<span class="mono">1:30 pm</span>`, 'Canvas Weekender · Olive', st('in', 'In stock'), '<span class="mono">2 → 2</span>', 'You edited this listing on eBay: paused for 24 h', 'Skipped'],
-      ] },
-    { id: 'notifications', name: 'Notifications', status: 'mixed', desc: 'Alerts for what needs you. Telegram works today; email arrives at launch.',
+        [q('2:41 pm'), 'Trail Jacket · Navy / L', st('out', 'Sold out'), q('1 → 0'), 'Supplier shows sold out', st('in', 'Written, read back')],
+        [q('2:14 pm'), 'Stoneware Mug Set · Slate', st('unk', 'Check failed'), q('1 → 1'), 'Holding: check failed, retry at 2:29 pm', 'No change'],
+        [q('1:58 pm'), 'Merino Crew Socks · Grey / L', st('in', 'In stock'), q('0 → 1'), 'Restock confirmed by a second check', st('in', 'Written, read back')],
+        [q('1:30 pm'), 'Canvas Weekender · Olive', st('in', 'In stock'), q(1), 'You edited this listing on eBay: ELM holds off for 24 h, then sync resumes', 'Skipped'],
+        [q('1:12 pm'), 'Linen Throw · Sand', st('in', 'In stock'), `${q(3)} yours`, 'Above 1, set by you: left alone unless you allow it', 'No change'],
+      ],
+      steps: [[0, 'Sold out at the supplier: ELM lowers the eBay quantity to 0 on that check and reads the listing back.'],
+        [1, 'A failed check is never read as sold out. ELM holds the last quantity and retries.'],
+        [2, 'A restock is confirmed by a second check before the quantity goes back to 1.'],
+        [3, 'You edited this listing yourself, so ELM holds off for 24 hours, then normal sync resumes by itself.'],
+        [4, 'Linen Throw shows 3 on eBay. Quantities above 1 are yours, so ELM leaves them alone unless you allow it.']] },
+    { slug: 'generating-skus', title: 'Generating SKUs', label: CONCEPT, status: 'launch', poster: 'generating-skus.png', src: 'generating-skus.mp4', captions: null,
+      desc: 'Variations without a SKU get a consistent one. Duplicate SKUs are flagged, which already works today.',
+      cols: ['Variation', 'SKU on eBay', 'ELM SKU', 'State'],
+      rows: [
+        [sub('Ridge Fleece Vest', 'Black / S'), '<span class="muted">Missing</span>', q('RFV-BK-S-4Q7'), st('unk', 'Ready for review')],
+        [sub('Ridge Fleece Vest', 'Black / M'), '<span class="muted">Missing</span>', q('RFV-BK-M-8T2'), st('unk', 'Ready for review')],
+        [sub('Trail Jacket', 'Navy / M'), q('NFS-TJ-NV-M'), 'Kept as it is', st('in', 'Existing SKU')],
+        [sub('Harbor Rope Tote', 'Natural'), q('HPO-RT-01'), 'Shared with another listing', st('out', 'Duplicate')],
+      ],
+      steps: [[[0, 1], 'At launch: variations without a SKU get one from a single consistent scheme, for you to review.'],
+        [2, 'SKUs you already have stay as they are.'],
+        [3, 'Works today: a duplicate SKU is flagged and kept out of sync until you fix it.']] },
+    { slug: 'creating-a-listing', title: 'Creating a listing', label: CONCEPT, status: 'launch', poster: 'creating-a-listing.png', src: 'creating-a-listing.mp4', captions: null,
+      desc: 'From a supplier product to an eBay listing draft you review. Use only images and descriptions you have the right to use.',
+      cols: ['Step', 'What ELM prepares', 'State'],
+      rows: [
+        ['Supplier product', 'Ridge Fleece Vest from Northfield Supply, inside your price filter', st('in', 'Selected')],
+        ['Variations', '10 variations: 5 sizes in 2 colors', st('in', 'Ready')],
+        ['Images', 'Supplier images matched to Black and Forest', st('in', 'Ready')],
+        ['Category and item specifics', 'Suggested category; 2 item specifics need your input', st('unk', 'Needs you')],
+        ['SKUs', '10 generated, one per variation', st('in', 'Ready')],
+        ['Publish', 'Sent to eBay only when you approve', st('unk', 'Waiting for review')],
+      ],
+      steps: [[0, 'Pick a product from a supplier catalog, filtered by a minimum and maximum supplier price.'],
+        [[1, 2], 'ELM prepares the variations and matches supplier images to each color.'],
+        [3, 'Category rules vary, so some drafts need a quick fix from you.'],
+        [4, 'Every variation gets a SKU, ready for stock sync.'],
+        [5, 'Nothing is published until you review and approve the draft. Eligible listings are then connected to monitoring.']] },
+    { slug: 'many-variations', title: 'Many variations', label: REAL, status: 'today', poster: 'many-variations.png', src: 'many-variations.mp4', captions: null,
+      desc: 'One listing, many variations. Each one follows its own supplier variant.',
+      cols: ['Variation', 'SKU', 'Supplier', 'eBay qty'],
+      rows: [
+        [sub('Trail Jacket', 'Navy / S'), q('NFS-TJ-NV-S'), st('in', 'In stock'), q(1)],
+        [sub('Trail Jacket', 'Navy / M'), q('NFS-TJ-NV-M'), st('out', 'Sold out'), q(0)],
+        [sub('Trail Jacket', 'Navy / L'), q('NFS-TJ-NV-L'), st('in', 'In stock'), q(1)],
+        [sub('Trail Jacket', 'Olive / S'), q('NFS-TJ-OL-S'), st('unk', 'Check failed'), `${q(1)} held`],
+        [sub('Trail Jacket', 'Olive / M'), q('NFS-TJ-OL-M'), st('in', 'In stock'), q(1)],
+        [sub('Trail Jacket', 'Olive / L'), q('NFS-TJ-OL-L'), st('in', 'In stock'), `${q(3)} left to you`],
+      ],
+      steps: [[1, 'Navy / M sold out, so only that variation goes to 0. The other sizes keep selling.'],
+        [3, 'Olive / S could not be checked. ELM holds its quantity instead of guessing.'],
+        [5, 'Olive / L shows 3, a quantity you set. ELM leaves it alone.']] },
+    { slug: 'notifications', title: 'Notifications', label: REAL, status: 'mixed', concept: 'Email alerts are a concept preview', poster: 'reviewing-notifications.png', src: 'reviewing-notifications.mp4', captions: null,
+      desc: 'Alerts for what needs you. Telegram works today; email arrives at launch.',
       cols: ['When', 'Event', 'Channel', 'Delivered'],
       rows: [
-        [`<span class="mono">2:41 pm</span>`, 'Trail Jacket · Navy / L sold out at supplier. eBay set to 0.', 'Telegram', st('in', 'Sent')],
-        [`<span class="mono">1:47 pm</span>`, 'Kestrel Home is blocking checks. 23 products on hold.', 'Telegram', st('in', 'Sent')],
-        [`<span class="mono">9:02 am</span>`, 'Daily summary: 37 changes, 3 suppliers healthy.', 'Email', '<span class="status status-launch caption-3">At launch</span>'],
-      ] },
-    { id: 'bulk', name: 'Bulk management', status: 'launch', desc: 'Select hundreds of products or listings and act on them together: import, map, start monitoring, generate SKUs.',
-      cols: ['', 'Product', 'Supplier', 'Variants', 'SKUs', 'Action'],
-      rows: [
-        ['<input type="checkbox" checked aria-label="Selected" disabled>', 'Ridge Fleece Vest', 'Northfield Supply', '<span class="mono">10</span>', 'Will generate', 'Create listing'],
-        ['<input type="checkbox" checked aria-label="Selected" disabled>', 'Harbor Rope Tote', 'Harbor &amp; Pine Outfitters', '<span class="mono">4</span>', 'Will generate', 'Create listing'],
-        ['<input type="checkbox" checked aria-label="Selected" disabled>', 'Glazed Serving Bowl', 'Kestrel Home', '<span class="mono">3</span>', 'Will generate', 'Create listing'],
-        ['<input type="checkbox" aria-label="Not selected" disabled>', 'Wool Beanie', 'Northfield Supply', '<span class="mono">6</span>', 'Existing', 'Map to listing'],
-      ] },
+        [q('2:41 pm'), 'eBay update failed for Trail Jacket · Navy / L. ELM will retry.', 'Telegram', st('in', 'Sent')],
+        [q('1:30 pm'), 'You changed Canvas Weekender · Olive on eBay. ELM holds off for 24 h.', 'Telegram', st('in', 'Sent')],
+        [q('11:05 am'), 'Mug Set · Sage changed its variations on eBay. Review the mapping.', 'Telegram', st('in', 'Sent')],
+        [q('10:12 am'), 'The same alerts by email.', 'Email', '<span class="status status-launch caption-3">At launch</span>'],
+      ],
+      steps: [[0, 'When an eBay update fails, you hear about it on Telegram.'],
+        [1, 'When you change a listing yourself, ELM tells you it is holding off.'],
+        [2, 'When a listing changes its variations, ELM asks you to review the mapping.'],
+        [3, 'At launch: the same alerts by email.']] },
   ];
-  function st(kind, label) { return `<span class="st st-${kind === 'pre' ? 'unk' : kind} caption-4">${label}</span>`; }
-  const statusChip = { today: '<span class="status status-today caption-3">Works today</span>', mixed: '<span class="status status-mixed caption-3">Partly today, rest at launch</span>', launch: '<span class="status status-launch caption-3">Concept preview · Coming at launch</span>' };
-  const scTabs = $('#showcase-tabs');
-  const scPanel = $('#showcase-panel');
-  scTabs.innerHTML = sc.map((s, i) => `<button class="tab button-sm" role="tab" id="sc-${s.id}" aria-controls="showcase-panel" aria-selected="${i === 0}" ${i ? 'tabindex="-1"' : ''}>${s.name}</button>`).join('');
-  scPanel.dataset.shared = 'true';
-  function renderShowcase(id) {
-    const s = sc.find((x) => x.id === id) || sc[0];
-    scPanel.setAttribute('aria-labelledby', `sc-${s.id}`);
-    scPanel.innerHTML = `<div class="sc-top"><span class="title-3">${s.name}</span><span class="labels">${statusChip[s.status]}<span class="tag tag-muted caption-4">Sample data</span></span></div>
-      <div class="sc-body" tabindex="0" role="region" aria-label="${s.name} table, scrolls sideways on small screens"><p class="sc-desc body-6">${s.desc}</p><table class="dt"><thead><tr>${s.cols.map((c) => `<th class="caption-4">${c}</th>`).join('')}</tr></thead>
-      <tbody>${s.rows.map((r) => `<tr>${r.map((c) => `<td class="body-6">${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
+  const STATUS = {
+    today: '<span class="status status-today caption-3">Works today</span>',
+    mixed: '<span class="status status-mixed caption-3">Partly today, rest at launch</span>',
+    launch: '<span class="status status-launch caption-3">Coming at launch</span>',
+  };
+  const demoTabs = $('#demo-tabs');
+  const demoPanel = $('#demo-panel');
+  if (demoTabs && demoPanel) {
+    const base = demoPanel.dataset.src;
+    const available = {};
+    const exists = async (path) => { try { return (await fetch(path, { method: 'HEAD' })).ok; } catch { return false; } };
+    demoTabs.innerHTML = DEMOS.map((d, i) => `<button class="tab button-sm" role="tab" id="dm-${d.slug}" aria-controls="demo-panel" aria-selected="${i === 0}"${i ? ' tabindex="-1"' : ''}>${esc(d.title)}</button>`).join('');
+    demoPanel.dataset.shared = 'true';
+    let current = 0;
+
+    function previewHtml(d) {
+      const tags = d.status === 'launch' ? `<span class="tag caption-4">Concept preview</span>`
+        : `<span class="tag caption-4">Product preview</span>${d.concept ? `<span class="tag caption-4">${esc(d.concept)}</span>` : ''}`;
+      return `<div class="sc-top"><span class="title-3">${esc(d.title)}</span><span class="labels">${STATUS[d.status]}${tags}<span class="tag tag-muted caption-4">Sample data</span></span></div>
+        <div class="demo-body"><p class="sc-desc body-6">${esc(d.desc)}</p>
+        <div class="sc-scroll" tabindex="0" role="region" aria-label="${esc(d.title)} table, scrolls sideways on small screens"><table class="dt"><thead><tr>${d.cols.map((c) => `<th class="caption-4" scope="col">${c}</th>`).join('')}</tr></thead>
+        <tbody>${d.rows.map((r) => `<tr>${r.map((c) => `<td class="body-6">${c}</td>`).join('')}</tr>`).join('')}</tbody></table></div>
+        <div class="demo-steps"><p class="caption-3 mono demo-count" id="demo-count"></p><p class="body-5 demo-text" id="demo-text" aria-live="polite"></p>
+        <div class="demo-nav"><button class="btn btn-ghost button-sm" type="button" id="demo-prev">Previous</button><button class="btn btn-primary button-sm" type="button" id="demo-next">Next step</button></div></div></div>`;
+    }
+    function videoHtml(d) {
+      const cap = d.captions && available[`${d.slug}:cap`] ? `<track kind="captions" src="${base}${d.captions}" srclang="en" label="English" default>` : '';
+      const poster = available[`${d.slug}:poster`] ? ` poster="${base}${d.poster}"` : '';
+      return `<div class="sc-top"><span class="title-3">${esc(d.title)}</span><span class="labels">${STATUS[d.status]}<span class="tag ${d.label === REAL ? 'tag-muted ' : ''}caption-4">${esc(d.label)}</span></span></div>
+        <div class="demo-video"><video controls playsinline preload="metadata"${poster} src="${base}${d.src}">${cap}</video></div>`;
+    }
+    function step(d, i) {
+      const n = d.steps.length;
+      current = (i + n) % n;
+      const [rowsOn, text] = d.steps[current];
+      const on = [].concat(rowsOn);
+      $$('tbody tr', demoPanel).forEach((tr, r) => tr.classList.toggle('hl', on.includes(r)));
+      $('#demo-count').textContent = `Step ${current + 1} of ${n}`;
+      $('#demo-text').textContent = text;
+      $('#demo-next').textContent = current === n - 1 ? 'Start again' : 'Next step';
+      $('#demo-prev').disabled = current === 0;
+    }
+    async function renderDemo(slug) {
+      const d = DEMOS.find((x) => x.slug === slug) || DEMOS[0];
+      demoPanel.setAttribute('aria-labelledby', `dm-${d.slug}`);
+      if (d.src && available[d.slug] === undefined) {
+        available[d.slug] = await exists(base + d.src);
+        if (available[d.slug]) {
+          available[`${d.slug}:poster`] = d.poster ? await exists(base + d.poster) : false;
+          available[`${d.slug}:cap`] = d.captions ? await exists(base + d.captions) : false;
+        }
+      }
+      if (demoTabs.querySelector('[aria-selected="true"]').id !== `dm-${d.slug}`) return; // another tab was picked meanwhile
+      if (d.src && available[d.slug]) { demoPanel.innerHTML = videoHtml(d); return; }
+      demoPanel.innerHTML = previewHtml(d);
+      $('#demo-next').addEventListener('click', () => step(d, current + 1));
+      $('#demo-prev').addEventListener('click', () => step(d, current - 1));
+      step(d, 0);
+    }
+    wireTabs(demoTabs, (tab) => { renderDemo(tab.id.replace('dm-', '')); track('demo_tab', tab.id); });
+    renderDemo(DEMOS[0].slug);
   }
-  wireTabs(scTabs, (tab) => { renderShowcase(tab.id.replace('sc-', '')); track('showcase_tab', tab.id); });
-  renderShowcase('inventory');
 
   // ------------------------------------------------------------ backends
   // Local server (Flask): the /api endpoints. Static copy (GitHub Pages): the waitlist goes to Supabase through two
@@ -545,56 +721,6 @@
     });
   }
 
-
-  // ------------------------------------------------------------ FAQ and video
+  // ------------------------------------------------------------ FAQ
   $$('#faq-list details').forEach((d) => d.addEventListener('toggle', () => { if (d.open) track('faq_open', $('summary', d).textContent); }));
-
-  const modal = $('#video-modal');
-  const video = $('#tour');
-  let lastFocus = null;
-  let videoChecked = false;
-  async function openVideo() {
-    lastFocus = document.activeElement;
-    modal.hidden = false;
-    document.body.style.overflow = 'hidden';
-    $('[data-close-video]').focus();
-    track('demo_open');
-    if (!videoChecked) {
-      videoChecked = true;
-      try {
-        const r = await fetch(video.dataset.src, { method: 'HEAD' });
-        if (!r.ok) throw new Error('missing');
-        // attach media only once the file exists, so a missing render never produces broken requests
-        video.poster = video.dataset.poster;
-        video.src = video.dataset.src;
-        const cap = await fetch(video.dataset.captions, { method: 'HEAD' }).catch(() => null);
-        if (cap && cap.ok) {
-          const track = document.createElement('track');
-          Object.assign(track, { kind: 'captions', src: video.dataset.captions, srclang: 'en', label: 'English', default: true });
-          video.append(track);
-        }
-      } catch {
-        video.hidden = true;
-        $('#video-missing').hidden = false;
-      }
-    }
-  }
-  function closeVideo() {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-    if (!video.paused) video.pause();
-    if (lastFocus) lastFocus.focus();
-  }
-  $$('[data-open-video]').forEach((b) => b.addEventListener('click', openVideo));
-  $('[data-close-video]').addEventListener('click', closeVideo);
-  modal.addEventListener('click', (e) => { if (e.target === modal) closeVideo(); });
-  modal.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeVideo();
-    if (e.key === 'Tab') {
-      const f = $$('button, video[controls], a[href]', modal).filter((x) => !x.hidden);
-      const first = f[0]; const last = f[f.length - 1];
-      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
-      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
-    }
-  });
 })();
