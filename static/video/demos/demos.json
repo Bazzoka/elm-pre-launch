@@ -1,0 +1,97 @@
+{
+ "version": 1,
+ "note": "Landing page demo clips cut from the ELM videos (videos/scripts/demo-clips.mjs). 1920x1080 H.264 + AAC, captions burned in, quiet original music, no voice. label real = the real ELM engine with sample data in test mode; concept = a concept preview of a feature coming at launch. The on-screen tag stays visible for the whole clip.",
+ "demos": [
+  {
+   "slug": "monitoring-a-supplier",
+   "title": "Monitoring a supplier, variant by variant",
+   "label": "real",
+   "labelText": "Real ELM engine · sample data · test mode",
+   "durationSec": 13.5,
+   "file": "video/demos/monitoring-a-supplier.mp4",
+   "poster": "video/demos/monitoring-a-supplier.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 2622982,
+   "source": "videos/out/V22-add-suppliers-1920x1080-vo.mp4 (today to variants, 16.00 s)"
+  },
+  {
+   "slug": "mapping-a-product",
+   "title": "Mapping a product with an exact SKU suggestion",
+   "label": "real",
+   "labelText": "Real ELM engine · sample data · test mode",
+   "durationSec": 20.3,
+   "file": "video/demos/mapping-a-product.mp4",
+   "poster": "video/demos/mapping-a-product.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 3219991,
+   "source": "videos/out/V11-supplier-mapping-1920x1080-vo.mp4 (today to suggest, 4.63 s)"
+  },
+  {
+   "slug": "updating-stock",
+   "title": "Updating eBay stock: 0 for a sold out variant",
+   "label": "real",
+   "labelText": "Real ELM engine · sample data · test mode",
+   "durationSec": 21,
+   "file": "video/demos/updating-stock.mp4",
+   "poster": "video/demos/updating-stock.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 3044073,
+   "source": "videos/out/V6-stock-sync-1920x1080-vo.mp4 (variants to oos, 12.77 s)"
+  },
+  {
+   "slug": "generating-skus",
+   "title": "Generating SKUs (coming at launch)",
+   "label": "concept",
+   "labelText": "Concept preview · Coming at launch",
+   "durationSec": 10,
+   "file": "video/demos/generating-skus.mp4",
+   "poster": "video/demos/generating-skus.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 1024553,
+   "source": "videos/out/V10-sku-automation-1920x1080-vo.mp4 (generate, 22.50 s)"
+  },
+  {
+   "slug": "creating-a-listing",
+   "title": "Creating a listing from a supplier product (coming at launch)",
+   "label": "concept",
+   "labelText": "Concept preview · Coming at launch",
+   "durationSec": 21.5,
+   "file": "video/demos/creating-a-listing.mp4",
+   "poster": "video/demos/creating-a-listing.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 2689737,
+   "source": "videos/out/V20-flagship-1920x1080-vo.mp4 (listIntro to listPublish, 132.70 s)"
+  },
+  {
+   "slug": "many-variations",
+   "title": "Listings with many variations",
+   "label": "real",
+   "labelText": "Real ELM engine · sample data · test mode",
+   "durationSec": 18.4,
+   "file": "video/demos/many-variations.mp4",
+   "poster": "video/demos/many-variations.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 3328651,
+   "source": "videos/out/V8-dashboard-tour-1920x1080-vo.mp4 (product to mappings, 20.50 s)"
+  },
+  {
+   "slug": "reviewing-notifications",
+   "title": "Reviewing decisions, logs and notifications",
+   "label": "real",
+   "labelText": "Real ELM engine · sample data · test mode",
+   "durationSec": 12.1,
+   "file": "video/demos/reviewing-notifications.mp4",
+   "poster": "video/demos/reviewing-notifications.png",
+   "width": 1920,
+   "height": 1080,
+   "sizeBytes": 2528642,
+   "source": "videos/out/V8-dashboard-tour-1920x1080-vo.mp4 (decisions to logs, 38.87 s)"
+  }
+ ]
+}
