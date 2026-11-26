@@ -1,0 +1,65 @@
+WEBVTT
+
+1
+00:00:00.300 --> 00:00:02.473
+Your supplier sells out of a variant.
+
+2
+00:00:03.100 --> 00:00:05.643
+But your eBay listing still shows it in stock.
+
+3
+00:00:06.400 --> 00:00:10.120
+So you check supplier pages by hand, one listing at a time.
+
+4
+00:00:10.200 --> 00:00:11.946
+Miss one, and you oversell.
+
+5
+00:00:13.400 --> 00:00:18.947
+ELM keeps your eBay listings in step with your Shopify-powered suppliers, down to the variant.
+
+6
+00:00:19.300 --> 00:00:23.987
+Today, it checks every supplier variant: in stock, out of stock, or unknown.
+
+7
+00:00:24.067 --> 00:00:27.689
+When one sells out, the matching eBay quantity goes to zero.
+
+8
+00:00:28.000 --> 00:00:32.320
+If a check fails, ELM holds the last known quantity instead of zeroing it.
+
+9
+00:00:32.400 --> 00:00:36.160
+And a second check confirms a restock before stock goes back up.
+
+10
+00:00:36.400 --> 00:00:40.153
+Dry run shows you every change before anything is sent to eBay.
+
+11
+00:00:40.233 --> 00:00:42.847
+And every change has a recorded reason.
+
+12
+00:00:43.300 --> 00:00:47.454
+Coming at launch: discover a supplier's catalog and pick products.
+
+13
+00:00:47.700 --> 00:00:51.436
+ELM will generate SKUs and prepare your eBay listings.
+
+14
+00:00:51.600 --> 00:00:54.887
+Smart mapping will match by SKU, options, and title.
+
+15
+00:00:54.967 --> 00:00:57.045
+Uncertain matches go to your review.
+
+16
+00:00:57.800 --> 00:01:04.050
+ELM Easy Monitoring. Early access is coming soon. Follow ELM to get the waitlist link first.

@@ -1,0 +1,90 @@
+/*
+ * ELM Easy Monitoring: design tokens. The single source for colour, type, spacing, radius and motion.
+ * Used by the landing page (site/static), the social templates (social/templates) and the video project (videos/).
+ * Keep brand/brand.json in step when a colour or font changes.
+ */
+
+@font-face { font-family: 'Manrope'; src: url('fonts/manrope-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url('fonts/manrope-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url('fonts/manrope-latin-600-normal.woff2') format('woff2'); font-weight: 600; font-display: swap; }
+@font-face { font-family: 'Manrope'; src: url('fonts/manrope-latin-700-normal.woff2') format('woff2'); font-weight: 700; font-display: swap; }
+@font-face { font-family: 'Geist Mono'; src: url('fonts/geist-mono-latin-400-normal.woff2') format('woff2'); font-weight: 400; font-display: swap; }
+@font-face { font-family: 'Geist Mono'; src: url('fonts/geist-mono-latin-500-normal.woff2') format('woff2'); font-weight: 500; font-display: swap; }
+
+:root {
+  /* brand */
+  --elm-300: #8BEBC0;
+  --elm-400: #3DDC97;   /* ELM green: the mark, primary buttons on dark */
+  --elm-500: #20B877;
+  --elm-600: #0F7A4D;   /* ELM green for text on light surfaces (5.3:1 on #FAFAF7) */
+  --elm-ink: #131209;   /* ELM ink: the darkest surface, text on ELM green */
+  --amber-400: #F6B53F; /* attention: low stock, review needed */
+  --red-400: #F26464;   /* risk: out of stock, oversell */
+  --sky-400: #6CB8FF;   /* information, neutral system events */
+
+  /* dark theme surfaces (the default for marketing) */
+  --bg: #131209;
+  --surface-1: #1F1F1F;
+  --surface-2: #272727;
+  --surface-3: #313131;
+  --border: rgba(250, 250, 247, 0.10);
+  --border-strong: rgba(250, 250, 247, 0.18);
+  --text-1: #FAFAF7;
+  --text-2: #C9C8BF;
+  --text-3: #9A988D;
+  --on-brand: #131209;
+  --focus: #8BEBC0;
+
+  /* light theme values, for light assets */
+  --light-bg: #FAFAF7;
+  --light-surface-1: #FFFFFF;
+  --light-surface-2: #F1F1EC;
+  --light-border: #E3E2DA;
+  --light-text-1: #131209;
+  --light-text-2: #4A493F;
+  --light-text-3: #6B6A5E;
+
+  /* type */
+  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', monospace;
+
+  /* spacing: the only allowed values */
+  --sp-25: 2px; --sp-50: 4px; --sp-75: 8px; --sp-100: 12px; --sp-200: 16px; --sp-300: 24px;
+  --sp-400: 32px; --sp-500: 40px; --sp-600: 48px; --sp-700: 64px; --sp-800: 80px; --sp-900: 96px;
+
+  /* radius: Tailwind steps */
+  --r-sm: 2px; --r: 4px; --r-md: 6px; --r-lg: 8px; --r-xl: 12px; --r-2xl: 16px; --r-3xl: 24px; --r-full: 9999px;
+
+  /* motion */
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur: 500ms;
+  --dur-fast: 300ms;
+}
+
+/* Named text styles (landing-page-design skill, B1). Size / line height / weight. */
+.heading-1 { font-size: 60px; line-height: 60px; font-weight: 600; letter-spacing: -0.02em; }
+.heading-2 { font-size: 48px; line-height: 48px; font-weight: 600; letter-spacing: -0.02em; }
+.heading-3 { font-size: 36px; line-height: 40px; font-weight: 600; letter-spacing: -0.015em; }
+.heading-4 { font-size: 30px; line-height: 36px; font-weight: 600; letter-spacing: -0.01em; }
+.heading-5 { font-size: 24px; line-height: 32px; font-weight: 600; }
+.heading-6 { font-size: 20px; line-height: 28px; font-weight: 600; }
+.title-1 { font-size: 20px; line-height: 28px; font-weight: 500; }
+.title-2 { font-size: 18px; line-height: 28px; font-weight: 500; }
+.title-3 { font-size: 16px; line-height: 24px; font-weight: 500; }
+.title-4 { font-size: 14px; line-height: 20px; font-weight: 500; }
+.title-5 { font-size: 12px; line-height: 16px; font-weight: 500; }
+.body-1 { font-size: 16px; line-height: 24px; font-weight: 600; }
+.body-2 { font-size: 16px; line-height: 24px; font-weight: 500; }
+.body-3 { font-size: 16px; line-height: 24px; font-weight: 400; }
+.body-4 { font-size: 14px; line-height: 20px; font-weight: 600; }
+.body-5 { font-size: 14px; line-height: 20px; font-weight: 500; }
+.body-6 { font-size: 14px; line-height: 20px; font-weight: 400; }
+.button-lg { font-size: 18px; line-height: 28px; font-weight: 600; }
+.button-md { font-size: 16px; line-height: 24px; font-weight: 600; }
+.button-sm { font-size: 14px; line-height: 20px; font-weight: 600; }
+.caption-1 { font-size: 14px; line-height: 20px; font-weight: 500; }
+.caption-2 { font-size: 14px; line-height: 20px; font-weight: 400; }
+.caption-3 { font-size: 12px; line-height: 16px; font-weight: 600; }
+.caption-4 { font-size: 12px; line-height: 16px; font-weight: 500; }
+.caption-5 { font-size: 12px; line-height: 16px; font-weight: 400; }
+.mono { font-family: var(--font-mono); font-feature-settings: 'tnum' 1; }
