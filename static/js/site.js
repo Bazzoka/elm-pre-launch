@@ -456,10 +456,12 @@
     const when = new Date().toLocaleString('en-US', { timeZone: 'Africa/Cairo', dateStyle: 'medium', timeStyle: 'short' });
     const source = [attribution.utm_source, attribution.utm_campaign, attribution.referrer_host].filter(Boolean).join(' / ') || 'direct';
     try {
+      // Same field shape as the contact form (name, email, message), which Web3Forms delivers reliably.
       fetch('https://api.web3forms.com/submit', {
-        method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ access_key: W3F, subject: `[ELM waitlist] New signup: ${email}`, from_name: 'ELM pre-launch page', replyto: email,
-          'Signup email': email, 'Plan picked': planName, 'Joined (Cairo time)': when, Source: source }),
+        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_key: W3F, subject: `[ELM waitlist] New signup: ${email}`, from_name: 'ELM pre-launch page',
+          name: 'ELM waitlist', email, replyto: email,
+          message: `New waitlist signup.\nEmail: ${email}\nPlan picked: ${planName}\nJoined (Cairo time): ${when}\nSource: ${source}` }),
       }).catch(() => {});
     } catch { /* the signup is saved either way */ }
   }
