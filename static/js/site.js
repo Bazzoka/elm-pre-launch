@@ -447,6 +447,22 @@
   const has = (v) => !!v && !/^\{\{/.test(v);
   const SB = STATIC && has(cfg.supabaseUrl) && has(cfg.supabaseKey) ? { url: cfg.supabaseUrl, key: cfg.supabaseKey } : null;
   const W3F = STATIC && has(cfg.web3formsKey) ? cfg.web3formsKey : null;
+  // Static copy: after a signup is saved in the database, email the owner a short notice through Web3Forms.
+  // Fire and forget: the signup is already stored, so a failed notice never affects the visitor. Bots that fill the
+  // honeypot are not stored and are not reported.
+  function notifyOwner(email, plan) {
+    if (!W3F || (document.getElementById('company_website') || {}).value) return;
+    const planName = plan ? ({ starter: 'Starter', growth: 'Growth', pro: 'Pro', business: 'Business' }[plan] || plan) : 'Not sure yet';
+    const when = new Date().toLocaleString('en-US', { timeZone: 'Africa/Cairo', dateStyle: 'medium', timeStyle: 'short' });
+    const source = [attribution.utm_source, attribution.utm_campaign, attribution.referrer_host].filter(Boolean).join(' / ') || 'direct';
+    try {
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST', keepalive: true, headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify({ access_key: W3F, subject: `[ELM waitlist] New signup: ${email}`, from_name: 'ELM pre-launch page', replyto: email,
+          'Signup email': email, 'Plan picked': planName, 'Joined (Cairo time)': when, Source: source }),
+      }).catch(() => {});
+    } catch { /* the signup is saved either way */ }
+  }
   async function rpc(fn, body) {
     if (!SB) throw new Error('not configured');
     const r = await fetch(`${SB.url}/rest/v1/rpc/${fn}`, {
@@ -627,6 +643,7 @@
         $('#success-text').replaceChildren('We saved your place for ', strong,
           `. ${plan ? `Plan noted: ${PLAN_NAMES[plan]}. ` : ''}We will email you when early access opens.`);
         loadStats();
+        notifyOwner(email, plan);
       } else {
         $('#success-email').textContent = email;
       }
